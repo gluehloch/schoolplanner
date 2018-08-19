@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDateTime"%>
+<%@page import="java.time.LocalDate"%>
 <%@ page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,7 +11,7 @@
 <body>
 	<h1>Schoolplanner</h1>
 	<ul>
-		<li><%=new Date().toString()%></li>
+		<li><%= LocalDateTime.now().toString() %></li>
 		<li>PathInfo: <%=request.getPathInfo()%></li>
 		<li>ServletPath: <%=request.getServletPath()%></li>
 		<li>ServerName: <%=request.getServerName()%></li>
