@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/office")
+@RequestMapping("/timetable")
 public class TimetableService {
 
 	// ------------------------------------------------------------------------
@@ -29,7 +29,7 @@ public class TimetableService {
 	// ------------------------------------------------------------------------
 
 	@CrossOrigin
-	@RequestMapping(value = "/season/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/courses/today", method = RequestMethod.GET)
 	public List<String> findAllSeason() {
 
 		// return betofficeBasicJsonService.findAllSeason();

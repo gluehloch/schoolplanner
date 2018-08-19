@@ -11,6 +11,7 @@
 	<artifactId>schoolplanner</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>schoolplanner</name>
+	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
@@ -50,5 +51,6 @@
 	<properties>
 		<org.springframework.version>5.0.8.RELEASE</org.springframework.version>
 		<org.hibernate.version>5.3.5.Final</org.hibernate.version>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
 	</properties>
 </project>
