@@ -18,14 +18,61 @@ public class Class {
 
     @NotNull
     private String name;
+    
+    private String year;
+
+    private Teacher teacher;
+    
+    @NotNull
+    private School school;
 
     @OneToMany
     private Set<Student> students = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     
+    public String getYear() {
+        return year;
+    }
+    
+    public void setYear(String year) {
+        this.year = year;
+    }
+    
+    public Teacher getTeacher() {
+        return teacher;
+    }
+    
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
     public Set<Student> getStudents() {
         return students;
     }
-    
+
     public void setStudents(Set<Student> students) {
         this.students = students;
     }

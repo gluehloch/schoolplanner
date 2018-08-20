@@ -12,15 +12,11 @@ public class Person {
 	@NotNull
 	private String firstname;
 
-	@NotNull
 	private LocalDate birthday;
 
-	@NotNull
 	private String telephone;
-
-	public Person() {
-		super();
-	}
+	
+	private String email;
 
 	public String getName() {
 		return name;
@@ -52,6 +48,14 @@ public class Person {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	
+	public String getEmail() {
+	    return email;
+	}
+	
+	public void setEmail(String email) {
+	    this.email = email;
 	}
 
 }
