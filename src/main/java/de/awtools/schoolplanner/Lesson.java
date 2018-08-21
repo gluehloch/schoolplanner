@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import net.bytebuddy.description.modifier.EnumerationState;
-
 @Entity(name = "Lesson")
 public class Lesson {
 
