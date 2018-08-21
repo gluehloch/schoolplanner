@@ -39,7 +39,7 @@ public class Lesson {
     @NotNull
     @Column(name = "dayofweek")
     @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWekk;
+    private DayOfWeek dayOfWeek;
 
     public Long getId() {
         return id;
@@ -65,12 +65,12 @@ public class Lesson {
         this.endTime = endTime;
     }
 
-    public DayOfWeek getDayOfWekk() {
-        return dayOfWekk;
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setDayOfWekk(DayOfWeek dayOfWekk) {
-        this.dayOfWekk = dayOfWekk;
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
 }
