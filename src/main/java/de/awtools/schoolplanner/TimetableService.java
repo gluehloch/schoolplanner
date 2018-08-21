@@ -49,7 +49,7 @@ public class TimetableService {
 	public List<String> findCoursesForToday(@PathVariable("schoolId") String schoolId,
 			@PathVariable("classId") String classId) {
 
-		Class clazz = classRepository.findClass(4711);
+		SchoolClass clazz = classRepository.findClass(4711);
 		
 		return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
 	}

@@ -11,8 +11,8 @@ public class ClassRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	public Class findClass(long id) {
-		return em.createQuery("select c from Class c", Class.class).getSingleResult();
+	public SchoolClass findClass(long id) {
+		return em.createQuery("select c from SchoolClass c", SchoolClass.class).getSingleResult();
 	}
 
 }

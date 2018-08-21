@@ -18,13 +18,13 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${org.hibernate.version}</version>
-			<type>pom</type>
+			<scope>compile</scope>
 		</dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${org.hibernate.version}</version>
-            <type>pom</type>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Wird mit JDK 10 nicht mehr ausgeliefert und muss explizit dazu gebunden werden. -->

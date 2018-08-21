@@ -17,7 +17,7 @@ public class Timetable {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "class_ref")
-    private Class ofClass;
+    private SchoolClass ofClass;
 
     public Long getId() {
         return id;
@@ -27,11 +27,11 @@ public class Timetable {
         this.id = id;
     }
 
-    public Class getOfClass() {
+    public SchoolClass getOfClass() {
         return ofClass;
     }
 
-    public void setOfClass(Class ofClass) {
+    public void setOfClass(SchoolClass ofClass) {
         this.ofClass = ofClass;
     }
 
