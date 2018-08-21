@@ -2,6 +2,7 @@ package de.awtools.schoolplanner;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 public class Person {
@@ -12,10 +13,13 @@ public class Person {
 	@NotNull
 	private String firstname;
 
+	@Column(name = "birthday")
 	private LocalDate birthday;
 
+	@Column(name = "telephone")
 	private String telephone;
 	
+	@Column(name = "email")
 	private String email;
 
 	public String getName() {

@@ -10,6 +10,25 @@ drop table if exists student;
 drop table if exists teacher;
 drop table if exists timetable;
 
+create table school (
+    id bigint not null auto_increment,
+    shortname VARCHAR(20) not null,
+    name VARCHAR(100) not null,
+    primary key (id)
+) ENGINE=InnoDB;
+
+create table course (
+    id bigint not null auto_increment,
+    shortname VARCHAR(20) not null,
+    name VARCHAR(100),
+    primary key (id)
+) ENGINE=InnoDB;
+
+create table timetable (
+    id bigint not null auto_increment,
+    primary key (id)
+) ENGINE=InnoDB;
+
 create table class (
     id bigint not null auto_increment,
     name VARCHAR(10) not null,
@@ -55,3 +74,10 @@ alter table class_student
     add constraint fk_student_class
     foreign key (class_ref)
     references class (id);
+
+alter table class
+    add index fk_class_school(school_ref),
+
+    add constraint fk_class_school
+    foreign key (school_ref)
+    references school (id);

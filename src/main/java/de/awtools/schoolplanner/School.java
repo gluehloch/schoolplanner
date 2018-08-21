@@ -1,5 +1,6 @@
 package de.awtools.schoolplanner;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,10 +14,12 @@ public class School {
 	private Long id;
 
 	@NotNull
+	@Column(name = "shortname")
 	private String shortName;
 
 	@NotNull
-	private String longName;
+	@Column(name = "name")
+	private String name;
 
 	public Long getId() {
 		return id;
@@ -34,12 +37,12 @@ public class School {
 		this.shortName = shortName;
 	}
 
-	public String getLongName() {
-		return longName;
+	public String getName() {
+		return name;
 	}
 
-	public void setLongName(String longName) {
-		this.longName = longName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
