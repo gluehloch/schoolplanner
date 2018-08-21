@@ -2,6 +2,7 @@
 select 'Start installation of schoolplanner 0.0.1 MySQL schema.' as INFO;
 select version();
 
+drop table if exists lesson;
 drop table if exists class_student;
 drop table if exists class;
 drop table if exists course;
@@ -9,6 +10,15 @@ drop table if exists school;
 drop table if exists student;
 drop table if exists teacher;
 drop table if exists timetable;
+
+create table lesson (
+    id bigint not null auto_increment,
+    starttime time,
+    endtime time,
+    dayofweek int,
+    course_ref bigint, 
+    primary key (id)
+) ENGINE=InnoDB;
 
 create table school (
     id bigint not null auto_increment,
@@ -81,3 +91,10 @@ alter table class
     add constraint fk_class_school
     foreign key (school_ref)
     references school (id);
+
+alter table lesson
+    add index fk_lesson_course(course_ref),
+
+    add constraint fk_lesson_course
+    foreign key (course_ref)
+    references course (id);
