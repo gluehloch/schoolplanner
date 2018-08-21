@@ -2,9 +2,6 @@ package de.awtools.schoolplanner;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +34,7 @@ public class TimetableService {
 	// ------------------------------------------------------------------------
 
 	@Autowired
-	private EntityManagerFactory entityManagerFactory;
+	private ClassRepository classRepository;
 	
 	@Transactional
 	@CrossOrigin
@@ -52,9 +49,7 @@ public class TimetableService {
 	public List<String> findCoursesForToday(@PathVariable("schoolId") String schoolId,
 			@PathVariable("classId") String classId) {
 
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Query query = entityManager.createQuery("SELECT c FROM course c", Course.class);
-		List resultList = query.getResultList();
+		Class clazz = classRepository.findClass(4711);
 		
 		return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
 	}
