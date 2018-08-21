@@ -1,11 +1,8 @@
 package de.awtools.schoolplanner;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 @Entity(name = "Teacher")
 public class Teacher extends Person {

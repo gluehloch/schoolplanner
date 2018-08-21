@@ -15,7 +15,7 @@ create table lesson (
     id bigint not null auto_increment,
     starttime time,
     endtime time,
-    dayofweek int,
+    dayofweek VARCHAR(10),
     course_ref bigint, 
     primary key (id)
 ) ENGINE=InnoDB;

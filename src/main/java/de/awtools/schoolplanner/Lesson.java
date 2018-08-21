@@ -5,11 +5,15 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+
+import net.bytebuddy.description.modifier.EnumerationState;
 
 @Entity(name = "Lesson")
 public class Lesson {
@@ -34,6 +38,7 @@ public class Lesson {
 
     @NotNull
     @Column(name = "dayofweek")
+    @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWekk;
 
     public Long getId() {
