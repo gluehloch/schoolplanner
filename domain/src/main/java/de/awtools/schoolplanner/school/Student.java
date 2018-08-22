@@ -1,11 +1,13 @@
-package de.awtools.schoolplanner;
+package de.awtools.schoolplanner.school;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity(name = "Teacher")
-public class Teacher extends Person {
+@Entity
+@Table(name = "student")
+public class Student extends Person {
 
     @Id
     @GeneratedValue
@@ -18,5 +20,5 @@ public class Teacher extends Person {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
 }

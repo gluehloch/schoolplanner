@@ -1,4 +1,4 @@
-package de.awtools.schoolplanner;
+package de.awtools.schoolplanner.school;
 
 import java.time.LocalDate;
 

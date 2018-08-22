@@ -1,4 +1,4 @@
-package de.awtools.schoolplanner;
+package de.awtools.schoolplanner.school;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -11,9 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "Lesson")
+@Entity
+@Table(name = "lesson")
 public class Lesson {
 
     @Id

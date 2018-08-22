@@ -5,6 +5,7 @@ select version();
 drop table if exists lesson;
 drop table if exists class_student;
 drop table if exists class;
+drop table if exists schoolclass;
 drop table if exists course;
 drop table if exists school;
 drop table if exists student;
@@ -39,7 +40,7 @@ create table timetable (
     primary key (id)
 ) ENGINE=InnoDB;
 
-create table class (
+create table schoolclass (
     id bigint not null auto_increment,
     name VARCHAR(10) not null,
     year VARCHAR(50) not null,
@@ -83,14 +84,14 @@ alter table class_student
 
     add constraint fk_student_class
     foreign key (class_ref)
-    references class (id);
+    references schoolclass (id);
 
-alter table class
-    add index fk_class_school(school_ref),
+alter table schoolclass
+    add index fk_schoolclass_school(school_ref),
 
-    add constraint fk_class_school
+    add constraint fk_schoolclass_school
     foreign key (school_ref)
-    references school (id);
+    references schoolclass (id);
 
 alter table lesson
     add index fk_lesson_course(course_ref),

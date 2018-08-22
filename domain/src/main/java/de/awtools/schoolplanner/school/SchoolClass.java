@@ -1,4 +1,4 @@
-package de.awtools.schoolplanner;
+package de.awtools.schoolplanner.school;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "SchoolClass")
-@Table(name = "class")
+@Entity
+@Table(name = "schoolclass")
 public class SchoolClass {
 
     @Id

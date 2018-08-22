@@ -1,4 +1,4 @@
-package de.awtools.schoolplanner;
+package de.awtools.schoolplanner.school;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

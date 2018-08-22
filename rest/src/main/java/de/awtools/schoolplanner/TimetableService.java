@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.awtools.schoolplanner.school.ClassRepository;
+import de.awtools.schoolplanner.school.Course;
+import de.awtools.schoolplanner.school.SchoolClass;
+
 @RestController
 @RequestMapping("/timetable")
 public class TimetableService {
