@@ -1,6 +1,7 @@
 package de.awtools.schoolplanner;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.awtools.schoolplanner.school.ClassRepository;
+import de.awtools.schoolplanner.school.SchoolClassRepository;
 import de.awtools.schoolplanner.school.Course;
 import de.awtools.schoolplanner.school.SchoolClass;
 
@@ -38,7 +39,7 @@ public class TimetableService {
 	// ------------------------------------------------------------------------
 
 	@Autowired
-	private ClassRepository classRepository;
+	private SchoolClassRepository classRepository;
 	
 	@Transactional
 	@CrossOrigin
@@ -53,7 +54,7 @@ public class TimetableService {
 	public List<String> findCoursesForToday(@PathVariable("schoolId") String schoolId,
 			@PathVariable("classId") String classId) {
 
-		SchoolClass clazz = classRepository.findClass(4711);
+		Optional<SchoolClass> clazz = classRepository.findById(4711L);
 		
 		return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
 	}
