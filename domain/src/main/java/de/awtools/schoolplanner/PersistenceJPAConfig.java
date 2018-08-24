@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -20,6 +21,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("de.awtools.schoolplanner")
+@EnableJpaRepositories(basePackages = {
+        "de.awtools.schoolplanner"
+})
 public class PersistenceJPAConfig {
 
     @Bean
@@ -64,7 +68,11 @@ public class PersistenceJPAConfig {
         Properties properties = new Properties();
         // properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         properties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+                "hibernate.dialect", "org.hibernate.dialect.MariaDB102Dialect");
+        // MySQL5InnoDBDialect
+        // MariaDB102Dialect
+        // MySQL5Dialect
+        // MySQLDialect
 
         return properties;
     }
