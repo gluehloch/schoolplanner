@@ -2,15 +2,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>de.awtools</groupId>
-		<artifactId>master-pom</artifactId>
-		<version>6-java10</version>
-	</parent>
+
+    <parent>
+       <groupId>de.awtools</groupId>
+       <artifactId>schoolplanner</artifactId>
+       <version>0.0.1-SNAPSHOT</version>
+    </parent>
  
     <groupId>de.awtools.schoolplanner</groupId>
 	<artifactId>rest-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>Schoolplanner REST API project</name>
 	<packaging>war</packaging>
 
@@ -67,9 +67,4 @@
 		</dependency>
 	</dependencies>
 
-	<properties>
-		<org.springframework.version>5.0.8.RELEASE</org.springframework.version>
-		<org.hibernate.version>5.3.5.Final</org.hibernate.version>
-		<!-- <failOnMissingWebXml>false</failOnMissingWebXml> -->
-	</properties>
 </project>
