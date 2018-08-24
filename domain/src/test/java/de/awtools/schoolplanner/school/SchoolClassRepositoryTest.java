@@ -17,12 +17,20 @@ public class SchoolClassRepositoryTest {
     @Autowired
     private SchoolClassRepository schoolClassRepository;
 
+    @Autowired
+    private SchoolRepository schoolRepository;
+    
     @Test
     @Transactional
     public void findSchoolClass() {
+        School school = new School();
+        school.setName("Alexander von Humboldt Gymnasium");
+        school.setShortName("AVH");
+        schoolRepository.save(school);
+        
         SchoolClass schoolClass = new SchoolClass();
         schoolClass.setName("5c");
-        schoolClass.setSchool(new School());
+        schoolClass.setSchool(school);
         schoolClass.setTeacher(new Teacher());
         schoolClass.setYear("2018/2019");
         schoolClassRepository.save(schoolClass);
