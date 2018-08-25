@@ -8,9 +8,11 @@ import javax.validation.constraints.NotNull;
 public class Person {
 
 	@NotNull
+	@Column(name = "name")
 	private String name;
 
 	@NotNull
+	@Column(name = "firstname")
 	private String firstname;
 
 	@Column(name = "birthday")
