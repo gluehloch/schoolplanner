@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "student")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Student extends Person {
 
     @Id

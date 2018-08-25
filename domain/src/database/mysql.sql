@@ -91,7 +91,7 @@ alter table schoolclass
 
     add constraint fk_schoolclass_school
     foreign key (school_ref)
-    references schoolclass (id);
+    references school (id);
 
 alter table lesson
     add index fk_lesson_course(course_ref),

@@ -3,9 +3,11 @@ package de.awtools.schoolplanner.school;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-public class Person {
+@MappedSuperclass
+public abstract class Person {
 
 	@NotNull
 	@Column(name = "name")
