@@ -25,16 +25,6 @@ public class TimetableService {
 	// The beans
 	// ------------------------------------------------------------------------
 
-//    // -- betofficeBasicJsonService -------------------------------------------
-//
-//    private BetofficeBasicJsonService betofficeBasicJsonService;
-//
-//    @Autowired
-//    public void setBetofficeBasicJsonService(
-//            BetofficeBasicJsonService _betofficeBasicJsonService) {
-//
-//        betofficeBasicJsonService = _betofficeBasicJsonService;
-//    }
 
 	// ------------------------------------------------------------------------
 
