@@ -23,7 +23,6 @@ public class SchoolClassRepositoryTest {
 	@Test
 	public void findSchoolClass() {
 		schoolService.createSchoolClass();
-		System.out.println("Gleich kommt das ROLBACK...");
 	}
 
 }

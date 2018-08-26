@@ -19,78 +19,78 @@ import javax.validation.constraints.NotNull;
 @Table(name = "schoolclass")
 public class SchoolClass {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	private Long id;
 
-    @NotNull
-    @Column(name = "name")
-    private String name;
+	@NotNull
+	@Column(name = "name")
+	private String name;
 
-    @NotNull
-    @Column(name = "year")
-    private String year;
+	@NotNull
+	@Column(name = "year")
+	private String year;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_ref")
-    private Teacher teacher;
+	@ManyToOne
+	@JoinColumn(name = "teacher_ref")
+	private Teacher teacher;
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "school_ref")
-    private School school;
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "school_ref")
+	private School school;
 
-    @ManyToMany
-    @JoinTable(name = "class_student", joinColumns = @JoinColumn(name = "class_ref"), inverseJoinColumns = @JoinColumn(name = "student_ref"))
-    private Set<Student> students = new HashSet<>();
+	@ManyToMany
+	@JoinTable(name = "class_student", joinColumns = @JoinColumn(name = "class_ref"), inverseJoinColumns = @JoinColumn(name = "student_ref"))
+	private Set<Student> students = new HashSet<>();
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getYear() {
-        return year;
-    }
+	public String getYear() {
+		return year;
+	}
 
-    public void setYear(String year) {
-        this.year = year;
-    }
+	public void setYear(String year) {
+		this.year = year;
+	}
 
-    public Teacher getTeacher() {
-        return teacher;
-    }
+	public Teacher getTeacher() {
+		return teacher;
+	}
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
-    public School getSchool() {
-        return school;
-    }
+	public School getSchool() {
+		return school;
+	}
 
-    public void setSchool(School school) {
-        this.school = school;
-    }
+	public void setSchool(School school) {
+		this.school = school;
+	}
 
-    public Set<Student> getStudents() {
-        return students;
-    }
+	public Set<Student> getStudents() {
+		return students;
+	}
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
 
 }

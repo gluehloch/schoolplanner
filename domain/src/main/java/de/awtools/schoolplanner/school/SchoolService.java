@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolService {
 
-    @Autowired
-    private SchoolClassRepository schoolClassRepository;
+	@Autowired
+	private SchoolClassRepository schoolClassRepository;
 
-    @Autowired
-    private SchoolRepository schoolRepository;
-   
-    @Autowired
-    private TeacherRepository teacherRepository;
-    
-    @Autowired
-    private StudentRepository studentRepository;
-    
+	@Autowired
+	private SchoolRepository schoolRepository;
+
+	@Autowired
+	private TeacherRepository teacherRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
 	@Transactional
 	public SchoolClass createSchoolClass() {
 		School school = new School();

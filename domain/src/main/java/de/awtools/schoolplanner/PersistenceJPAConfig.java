@@ -43,7 +43,7 @@ public class PersistenceJPAConfig {
 		// dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
 		// dataSource.setUrl("jdbc:mysql://192.168.99.100:3307/school");
-		dataSource.setUrl("jdbc:mariadb://192.168.99.100:3307/school?autocommit=false");
+		dataSource.setUrl("jdbc:mariadb://192.168.99.100:3307/school");
 		dataSource.setUsername("school");
 		dataSource.setPassword("school");
 

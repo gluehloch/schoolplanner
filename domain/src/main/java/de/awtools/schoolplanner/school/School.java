@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class School {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 

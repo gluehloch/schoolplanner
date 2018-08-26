@@ -22,7 +22,7 @@ public abstract class Person {
 
 	@Column(name = "telephone")
 	private String telephone;
-	
+
 	@Column(name = "email")
 	private String email;
 
@@ -57,13 +57,13 @@ public abstract class Person {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	
+
 	public String getEmail() {
-	    return email;
+		return email;
 	}
-	
+
 	public void setEmail(String email) {
-	    this.email = email;
+		this.email = email;
 	}
 
 }
