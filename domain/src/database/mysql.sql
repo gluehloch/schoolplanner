@@ -23,14 +23,14 @@ create table lesson (
 
 create table school (
     id bigint not null auto_increment,
-    shortname VARCHAR(20) not null,
+    shortname VARCHAR(20) not null unique,
     name VARCHAR(100) not null,
     primary key (id)
 ) ENGINE=InnoDB;
 
 create table course (
     id bigint not null auto_increment,
-    shortname VARCHAR(20) not null,
+    shortname VARCHAR(20) not null unique,
     name VARCHAR(100),
     primary key (id)
 ) ENGINE=InnoDB;
@@ -48,6 +48,8 @@ create table schoolclass (
     school_ref bigint not null,
     primary key (id)
 ) ENGINE=InnoDB;
+
+alter table `schoolclass` add unique `unique_index`(`name`, `year`);
 
 create table class_student (
     class_ref bigint not null,

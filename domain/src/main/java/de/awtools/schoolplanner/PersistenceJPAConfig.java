@@ -21,59 +21,61 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("de.awtools.schoolplanner")
-@EnableJpaRepositories(basePackages = {
-        "de.awtools.schoolplanner"
-})
+@EnableJpaRepositories(basePackages = { "de.awtools.schoolplanner" })
 public class PersistenceJPAConfig {
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan(new String[] { "de.awtools.schoolplanner" });
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "de.awtools.schoolplanner" });
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        em.setJpaVendorAdapter(vendorAdapter);
-        em.setJpaProperties(additionalProperties());
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
 
-        return em;
-    }
+		return em;
+	}
 
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://192.168.99.100:3307/school");
-        dataSource.setUsername("school");
-        dataSource.setPassword("school");
-        return dataSource;
-    }
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		// dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
+		// dataSource.setUrl("jdbc:mysql://192.168.99.100:3307/school");
+		dataSource.setUrl("jdbc:mariadb://192.168.99.100:3307/school?autocommit=false");
+		dataSource.setUsername("school");
+		dataSource.setPassword("school");
 
-    @Bean
-    public PlatformTransactionManager transactionManager(
-            EntityManagerFactory emf) {
+		Properties connectionProperties = new Properties();
+		connectionProperties.setProperty("autocommit", "false");
+		dataSource.setConnectionProperties(connectionProperties);
+		return dataSource;
+	}
 
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(emf);
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 
-        return transactionManager;
-    }
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
 
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+		return transactionManager;
+	}
 
-    Properties additionalProperties() {
-        Properties properties = new Properties();
-        // properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty(
-                "hibernate.dialect", "org.hibernate.dialect.MariaDB102Dialect");
-        // MySQL5InnoDBDialect
-        // MariaDB102Dialect
-        // MySQL5Dialect
-        // MySQLDialect
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
 
-        return properties;
-    }
+	Properties additionalProperties() {
+		Properties properties = new Properties();
+		// properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MariaDB102Dialect");
+		// MySQL5InnoDBDialect
+		// MariaDB102Dialect
+		// MySQL5Dialect
+		// MySQLDialect
+
+		return properties;
+	}
 }
