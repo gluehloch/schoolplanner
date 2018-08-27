@@ -17,12 +17,12 @@ import de.awtools.schoolplanner.PersistenceJPAConfig;
 @Rollback
 public class SchoolClassRepositoryTest {
 
-	@Autowired
-	private SchoolService schoolService;
+    @Autowired
+    private SchoolService schoolService;
 
-	@Test
-	public void findSchoolClass() {
-		schoolService.createSchoolClass();
-	}
+    @Test
+    public void findSchoolClass() {
+        schoolService.createSchoolClass();
+    }
 
 }
