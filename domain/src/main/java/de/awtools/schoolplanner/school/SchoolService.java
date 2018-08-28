@@ -27,6 +27,7 @@ public class SchoolService {
     @Transactional
     public School createSchool(String shortname, String name) {
         List<School> schools = schoolRepository.findByShortName(shortname);
+
         if (schools.isEmpty()) {
             School school = new School();
             school.setShortName(shortname);
@@ -34,9 +35,8 @@ public class SchoolService {
             School save = schoolRepository.save(school);
             return save;
         } else {
-            throw new IllegalArgumentException(
-                    String.format("School [%s] is already defined!",
-                            shortname));
+            throw new IllegalArgumentException(String
+                    .format("School [%s] is already defined!", shortname));
         }
     }
 
@@ -46,6 +46,7 @@ public class SchoolService {
 
         List<Teacher> teachers = teacherRepository
                 .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
+
         if (teachers.isEmpty()) {
             Teacher teacher = new Teacher();
             teacher.setFirstname(firstname);
@@ -56,13 +57,43 @@ public class SchoolService {
             Teacher save = teacherRepository.save(teacher);
             return save;
         } else {
-            throw new IllegalArgumentException(
-                    String.format("The teacher [%s, %s Birthday: %s]", name,
-                            firstname,
-                            birthday == null ? "undefined"
-                                    : DateTimeFormatter.ISO_LOCAL_DATE
-                                            .format(birthday)));
+            throw new IllegalArgumentException(String.format(
+                    "The teacher [%s, %s Birthday: %s]", name, firstname,
+                    birthday == null ? "undefined"
+                            : DateTimeFormatter.ISO_LOCAL_DATE
+                                    .format(birthday)));
         }
+    }
+
+    @Transactional
+    public Student createStudent(String firstname, String name,
+            LocalDate birthday, String telephone, String email) {
+
+        List<Student> students = studentRepository
+                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
+
+        if (students.isEmpty()) {
+            Student teacher = new Student();
+            teacher.setFirstname(firstname);
+            teacher.setName(name);
+            teacher.setEmail(email);
+            teacher.setTelephone(telephone);
+            teacher.setBirthday(birthday);
+            Student save = studentRepository.save(teacher);
+            return save;
+        } else {
+            throw new IllegalArgumentException(String.format(
+                    "The student [%s, %s Birthday: %s]", name, firstname,
+                    birthday == null ? "undefined"
+                            : DateTimeFormatter.ISO_LOCAL_DATE
+                                    .format(birthday)));
+        }
+    }
+
+    @Transactional
+    public SchoolClass createSchoolClass(String name, String year,
+            School school, Teacher teacher) {
+        return null;
     }
 
     @Transactional
@@ -70,13 +101,7 @@ public class SchoolService {
         School school = createSchool("AVH", "Alexander von Humboldt Gymnasium");
         Teacher teacher = createTeacher("Letpery", "Murphy", null, null,
                 "pf@avh.hamburg");
-        Teacher teacherDouble = createTeacher("Letpery", "Murphy", null, null,
-                "pf@avh.hamburg");
-
-        Student student = new Student();
-        student.setFirstname("Lars");
-        student.setName("Winkler");
-        studentRepository.save(student);
+        Student student = createStudent("Lars", "Winkler", null, null, null);
 
         SchoolClass schoolClass = new SchoolClass();
         schoolClass.setName("5c");
