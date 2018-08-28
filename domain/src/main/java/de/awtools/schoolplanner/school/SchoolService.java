@@ -1,6 +1,7 @@
 package de.awtools.schoolplanner.school;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -43,20 +44,33 @@ public class SchoolService {
     public Teacher createTeacher(String firstname, String name,
             LocalDate birthday, String telephone, String email) {
 
-        Teacher teacher = new Teacher();
-        teacher.setFirstname(firstname);
-        teacher.setName(name);
-        teacher.setEmail(email);
-        teacher.setTelephone(telephone);
-        teacher.setBirthday(birthday);
-        Teacher save = teacherRepository.save(teacher);
-        return save;
+        List<Teacher> teachers = teacherRepository
+                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
+        if (teachers.isEmpty()) {
+            Teacher teacher = new Teacher();
+            teacher.setFirstname(firstname);
+            teacher.setName(name);
+            teacher.setEmail(email);
+            teacher.setTelephone(telephone);
+            teacher.setBirthday(birthday);
+            Teacher save = teacherRepository.save(teacher);
+            return save;
+        } else {
+            throw new IllegalArgumentException(
+                    String.format("The teacher [%s, %s Birthday: %s]", name,
+                            firstname,
+                            birthday == null ? "undefined"
+                                    : DateTimeFormatter.ISO_LOCAL_DATE
+                                            .format(birthday)));
+        }
     }
 
     @Transactional
     public SchoolClass createSchoolClass() {
         School school = createSchool("AVH", "Alexander von Humboldt Gymnasium");
         Teacher teacher = createTeacher("Letpery", "Murphy", null, null,
+                "pf@avh.hamburg");
+        Teacher teacherDouble = createTeacher("Letpery", "Murphy", null, null,
                 "pf@avh.hamburg");
 
         Student student = new Student();
