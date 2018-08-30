@@ -93,7 +93,14 @@ public class SchoolService {
     @Transactional
     public SchoolClass createSchoolClass(String name, String year,
             School school, Teacher teacher) {
-        return null;
+
+        SchoolClass schoolClass = new SchoolClass();
+        schoolClass.setYear(year);
+        schoolClass.setName(name);
+        schoolClass.setTeacher(teacher);
+        schoolClass.setSchool(school);
+
+        return schoolClass;
     }
 
     @Transactional
@@ -102,12 +109,8 @@ public class SchoolService {
         Teacher teacher = createTeacher("Letpery", "Murphy", null, null,
                 "pf@avh.hamburg");
         Student student = createStudent("Lars", "Winkler", null, null, null);
-
-        SchoolClass schoolClass = new SchoolClass();
-        schoolClass.setName("5c");
-        schoolClass.setSchool(school);
-        schoolClass.setTeacher(teacher);
-        schoolClass.setYear("2018/2019");
+        SchoolClass schoolClass = createSchoolClass("5c", "2018/2019", school,
+                teacher);
 
         schoolClass.getStudents().add(student);
 
