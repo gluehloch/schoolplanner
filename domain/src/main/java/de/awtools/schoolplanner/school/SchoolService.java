@@ -24,6 +24,9 @@ public class SchoolService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private CourseRepository courseRepository;
+
     @Transactional
     public School createSchool(String shortname, String name) {
         List<School> schools = schoolRepository.findByShortName(shortname);
@@ -101,6 +104,28 @@ public class SchoolService {
         schoolClass.setSchool(school);
 
         return schoolClass;
+    }
+
+    @Transactional
+    public Course createCourse(String shortName, String name) {
+        List<Course> courses = courseRepository.findByShortName(shortName);
+
+        if (courses.isEmpty()) {
+            Course course = new Course();
+            course.setShortName(shortName);
+            course.setName(name);
+            return course;
+        } else {
+            throw new IllegalArgumentException(String
+                    .format("Course [%s] is already defined!", shortName));
+        }
+    }
+
+    @Transactional
+    public Lesson createLesson() {
+        Lesson lesson = new Lesson();
+        // lesson.set
+        return lesson;
     }
 
     @Transactional
