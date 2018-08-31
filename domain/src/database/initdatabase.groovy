@@ -5,7 +5,8 @@ import de.awtools.schoolplanner.PersistenceJPAConfig
 import de.awtools.schoolplanner.school.SchoolService
 
 @Grab(group='de.awtools.schoolplanner', module='domain', version='0.0.1-SNAPSHOT')
-
+// @Grab(group='dom4j', module='dom4j', version='1.6.1')
+@Grab(group='dom4j', module='dom4j', version='1.6')
 
 class Service {
     SchoolService schoolService;
