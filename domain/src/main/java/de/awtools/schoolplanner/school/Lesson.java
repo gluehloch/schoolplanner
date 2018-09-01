@@ -43,7 +43,7 @@ public class Lesson {
     private DayOfWeek dayOfWeek;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "timetable_ref")
     private Timetable timetable;
 
     public Long getId() {
