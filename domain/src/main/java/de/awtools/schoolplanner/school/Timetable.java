@@ -1,4 +1,6 @@
-package de.awtools.schoolplanner.timetable;
+package de.awtools.schoolplanner.school;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,10 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import de.awtools.schoolplanner.school.SchoolClass;
 
 @Entity
 @Table(name = "timetable")
@@ -23,9 +24,13 @@ public class Timetable {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "class_ref")
-	private SchoolClass ofClass;
+	@JoinColumn(name = "schoolclass_ref")
+	private SchoolClass schoolClass;
 
+	@NotNull
+	@OneToMany(mappedBy = "timetable")
+	private List<Lesson> lessons;
+	
 	public Long getId() {
 		return id;
 	}
@@ -34,12 +39,20 @@ public class Timetable {
 		this.id = id;
 	}
 
-	public SchoolClass getOfClass() {
-		return ofClass;
+	public SchoolClass getSchoolClass() {
+		return schoolClass;
 	}
 
-	public void setOfClass(SchoolClass ofClass) {
-		this.ofClass = ofClass;
+	public void setSchoolClass(SchoolClass schoolClass) {
+		this.schoolClass = schoolClass;
+	}
+	
+	public List<Lesson> getLessons() {
+	    return lessons;
+	}
+	
+	public void setLesson(List<Lesson> lessons) {
+	    this.lessons = lessons;
 	}
 
 }

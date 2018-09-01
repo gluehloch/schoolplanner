@@ -19,59 +19,79 @@ import javax.validation.constraints.NotNull;
 @Table(name = "lesson")
 public class Lesson {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
+    private Long id;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "course_ref")
-	private Course course;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "course_ref")
+    private Course course;
 
-	@NotNull
-	@Column(name = "starttime")
-	private LocalTime startTime;
+    @NotNull
+    @Column(name = "starttime")
+    private LocalTime startTime;
 
-	@NotNull
-	@Column(name = "endtime")
-	private LocalTime endTime;
+    @NotNull
+    @Column(name = "endtime")
+    private LocalTime endTime;
 
-	@NotNull
-	@Column(name = "dayofweek")
-	@Enumerated(EnumType.STRING)
-	private DayOfWeek dayOfWeek;
+    @NotNull
+    @Column(name = "dayofweek")
+    @Enumerated(EnumType.STRING)
+    private DayOfWeek dayOfWeek;
 
-	public Long getId() {
-		return id;
-	}
+    @ManyToOne
+    @JoinColumn()
+    private Timetable timetable;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public LocalTime getStartTime() {
-		return startTime;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
-	}
+    public Course getCourse() {
+        return course;
+    }
 
-	public LocalTime getEndTime() {
-		return endTime;
-	}
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
-	}
+    public LocalTime getStartTime() {
+        return startTime;
+    }
 
-	public DayOfWeek getDayOfWeek() {
-		return dayOfWeek;
-	}
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
 
-	public void setDayOfWeek(DayOfWeek dayOfWeek) {
-		this.dayOfWeek = dayOfWeek;
-	}
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public Timetable getTimetable() {
+        return timetable;
+    }
+
+    public void setTimetable(Timetable timetable) {
+        this.timetable = timetable;
+    }
 
 }

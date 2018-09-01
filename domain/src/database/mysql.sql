@@ -17,27 +17,29 @@ create table lesson (
     starttime time,
     endtime time,
     dayofweek VARCHAR(10),
-    course_ref bigint, 
-    primary key (id)
+    course_ref bigint,
+    timetable_ref bigint, 
+    primary key(id)
 ) ENGINE=InnoDB;
 
 create table school (
     id bigint not null auto_increment,
     shortname VARCHAR(20) not null unique,
     name VARCHAR(100) not null,
-    primary key (id)
+    primary key(id)
 ) ENGINE=InnoDB;
 
 create table course (
     id bigint not null auto_increment,
     shortname VARCHAR(20) not null unique,
     name VARCHAR(100),
-    primary key (id)
+    primary key(id)
 ) ENGINE=InnoDB;
 
 create table timetable (
     id bigint not null auto_increment,
-    primary key (id)
+    schoolclass_ref bigint not null unique,
+    primary key(id)
 ) ENGINE=InnoDB;
 
 create table schoolclass (
@@ -46,7 +48,7 @@ create table schoolclass (
     year VARCHAR(50) not null,
     teacher_ref bigint,
     school_ref bigint not null,
-    primary key (id)
+    primary key(id)
 ) ENGINE=InnoDB;
 
 alter table `schoolclass` add unique `unique_index`(`name`, `year`);
@@ -64,7 +66,7 @@ create table student (
     telephone VARCHAR(50),
     birthday datetime,
     email VARCHAR(50),
-    primary key (id)
+    primary key(id)
 ) ENGINE=InnoDB;
 
 create table teacher (
@@ -74,7 +76,7 @@ create table teacher (
     telephone VARCHAR(50),
     birthday datetime,
     email VARCHAR(50),
-    primary key (id)
+    primary key(id)
  ) ENGINE=InnoDB;
 
 alter table class_student
@@ -82,22 +84,29 @@ alter table class_student
 
     add constraint fk_class_student
     foreign key (student_ref)
-    references student (id),
+    references student(id),
 
     add constraint fk_student_class
     foreign key (class_ref)
-    references schoolclass (id);
+    references schoolclass(id);
 
 alter table schoolclass
     add index fk_schoolclass_school(school_ref),
 
     add constraint fk_schoolclass_school
     foreign key (school_ref)
-    references school (id);
+    references school(id);
 
 alter table lesson
     add index fk_lesson_course(course_ref),
 
     add constraint fk_lesson_course
     foreign key (course_ref)
-    references course (id);
+    references course(id);
+
+alter table lesson
+    add index fk_lesson_timetable(timetable_ref),
+
+    add constraint fk_lesson_timetable
+    foreign key (timetable_ref)
+    references timetable(id);

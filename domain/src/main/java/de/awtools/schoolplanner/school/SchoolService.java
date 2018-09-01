@@ -1,6 +1,8 @@
 package de.awtools.schoolplanner.school;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -122,9 +124,14 @@ public class SchoolService {
     }
 
     @Transactional
-    public Lesson createLesson() {
+    public Lesson createLesson(Course course, DayOfWeek dayOfWeek,
+            LocalTime startTime, LocalTime endTime) {
+
         Lesson lesson = new Lesson();
-        // lesson.set
+        lesson.setStartTime(startTime);
+        lesson.setEndTime(endTime);
+        lesson.setCourse(course);
+        lesson.setDayOfWeek(dayOfWeek);
         return lesson;
     }
 
@@ -136,7 +143,6 @@ public class SchoolService {
         Student student = createStudent("Lars", "Winkler", null, null, null);
         SchoolClass schoolClass = createSchoolClass("5c", "2018/2019", school,
                 teacher);
-
         schoolClass.getStudents().add(student);
 
         schoolClassRepository.save(schoolClass);
