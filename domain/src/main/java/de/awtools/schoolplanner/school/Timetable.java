@@ -1,5 +1,6 @@
 package de.awtools.schoolplanner.school;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Timetable {
 
 	@NotNull
 	@OneToMany(mappedBy = "timetable")
-	private List<Lesson> lessons;
+	private List<Lesson> lessons = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -53,6 +54,10 @@ public class Timetable {
 	
 	public void setLesson(List<Lesson> lessons) {
 	    this.lessons = lessons;
+	}
+	
+	public void addLesson(Lesson lesson) {
+	    lessons.add(lesson);
 	}
 
 }

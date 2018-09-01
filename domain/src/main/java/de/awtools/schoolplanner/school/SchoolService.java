@@ -29,6 +29,12 @@ public class SchoolService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private LessonRepository lessonRepository;
+
+    @Autowired
+    private TimetableRepository timetableRepository;
+
     @Transactional
     public School createSchool(String shortname, String name) {
         List<School> schools = schoolRepository.findByShortName(shortname);
@@ -104,7 +110,7 @@ public class SchoolService {
         schoolClass.setName(name);
         schoolClass.setTeacher(teacher);
         schoolClass.setSchool(school);
-
+        schoolClassRepository.save(schoolClass);
         return schoolClass;
     }
 
@@ -116,6 +122,7 @@ public class SchoolService {
             Course course = new Course();
             course.setShortName(shortName);
             course.setName(name);
+            courseRepository.save(course);
             return course;
         } else {
             throw new IllegalArgumentException(String
@@ -132,7 +139,16 @@ public class SchoolService {
         lesson.setEndTime(endTime);
         lesson.setCourse(course);
         lesson.setDayOfWeek(dayOfWeek);
+        lessonRepository.save(lesson);
         return lesson;
+    }
+
+    @Transactional
+    public Timetable createTimetable(SchoolClass schoolClass) {
+        Timetable timetable = new Timetable();
+        timetable.setSchoolClass(schoolClass);
+        timetableRepository.save(timetable);
+        return timetable;
     }
 
     @Transactional
@@ -145,6 +161,27 @@ public class SchoolService {
                 teacher);
         schoolClass.getStudents().add(student);
 
+        Course mathe = createCourse("M", "Mathematik");
+        Course deutsch = createCourse("D", "Deutsch");
+        Course religion = createCourse("Reli", "Religion");
+        Course englisch = createCourse("E", "Englisch");
+        Course technik = createCourse("Tech", "Technik");
+
+        Lesson deutschMontag = createLesson(deutsch, DayOfWeek.MONDAY,
+                LocalTime.of(8, 0), LocalTime.of(9, 30));
+        Lesson religionMontag = createLesson(religion, DayOfWeek.MONDAY,
+                LocalTime.of(10, 0), LocalTime.of(11, 30));
+        Lesson englischMontag = createLesson(englisch, DayOfWeek.MONDAY,
+                LocalTime.of(11, 50), LocalTime.of(12, 35));
+        Lesson technikMontag = createLesson(technik, DayOfWeek.MONDAY,
+                LocalTime.of(12, 40), LocalTime.of(14, 10));
+
+        Timetable timetable = createTimetable(schoolClass);
+        timetable.addLesson(deutschMontag);
+        timetable.addLesson(religionMontag);
+        timetable.addLesson(englischMontag);
+        timetable.addLesson(technikMontag);
+        
         schoolClassRepository.save(schoolClass);
         return schoolClass;
     }
