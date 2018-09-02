@@ -14,6 +14,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolService {
 
+    private static final LocalTime H_13_25 = LocalTime.of(13, 25);
+    private static final LocalTime H_14_10 = LocalTime.of(14, 10);
+    private static final LocalTime H_12_40 = LocalTime.of(12, 40);
+    private static final LocalTime H_12_35 = LocalTime.of(12, 35);
+    private static final LocalTime H_11_50 = LocalTime.of(11, 50);
+    private static final LocalTime H_11_30 = LocalTime.of(11, 30);
+    private static final LocalTime H_10_00 = LocalTime.of(10, 0);
+    private static final LocalTime H_09_30 = LocalTime.of(9, 30);
+    private static final LocalTime H_08_00 = LocalTime.of(8, 0);
+
     @Autowired
     private SchoolClassRepository schoolClassRepository;
 
@@ -161,27 +171,75 @@ public class SchoolService {
                 teacher);
         schoolClass.getStudents().add(student);
 
+        Course biologie = createCourse("Bio", "Biologie");
+        Course sport = createCourse("Sport", "Sport");
         Course mathe = createCourse("M", "Mathematik");
         Course deutsch = createCourse("D", "Deutsch");
         Course religion = createCourse("Reli", "Religion");
         Course englisch = createCourse("E", "Englisch");
         Course technik = createCourse("Tech", "Technik");
+        Course geographie = createCourse("Geo", "Geographie");
+        Course kunst = createCourse("Ku", "Kunst");
+        Course musik = createCourse("Mu", "Musik");
+        Course lernenLernen = createCourse("LL", "LernenLernen");
+        Course klassenrat = createCourse("KS", "Klassenrat");
 
+        // Montag
         Lesson deutschMontag = createLesson(deutsch, DayOfWeek.MONDAY,
-                LocalTime.of(8, 0), LocalTime.of(9, 30));
+                H_08_00, H_09_30);
         Lesson religionMontag = createLesson(religion, DayOfWeek.MONDAY,
-                LocalTime.of(10, 0), LocalTime.of(11, 30));
+                H_10_00, H_11_30);
         Lesson englischMontag = createLesson(englisch, DayOfWeek.MONDAY,
-                LocalTime.of(11, 50), LocalTime.of(12, 35));
+                H_11_50, H_12_35);
         Lesson technikMontag = createLesson(technik, DayOfWeek.MONDAY,
-                LocalTime.of(12, 40), LocalTime.of(14, 10));
+                H_12_40, H_14_10);
 
         Timetable timetable = createTimetable(schoolClass);
         timetable.addLesson(deutschMontag);
         timetable.addLesson(religionMontag);
         timetable.addLesson(englischMontag);
         timetable.addLesson(technikMontag);
-        
+
+        // Dienstag
+        Lesson matheDienstag = createLesson(mathe, DayOfWeek.TUESDAY,
+                H_08_00, H_09_30);
+        Lesson deutschDienstrag = createLesson(deutsch, DayOfWeek.TUESDAY,
+                H_10_00, H_11_30);
+        Lesson geographie1Dienstag = createLesson(geographie, DayOfWeek.TUESDAY,
+                H_11_50, H_12_35);
+        Lesson geographie2Dienstag = createLesson(geographie, DayOfWeek.TUESDAY,
+                H_12_40, H_13_25);
+
+        // Mittwoch
+        Lesson biologieMittwoch = createLesson(biologie, DayOfWeek.WEDNESDAY,
+                H_08_00, H_09_30);
+        Lesson sportMittwoch = createLesson(sport, DayOfWeek.WEDNESDAY,
+                H_10_00, H_11_30);
+        Lesson kunst1Mittwoch = createLesson(kunst, DayOfWeek.WEDNESDAY,
+                H_11_50, H_12_35);
+        Lesson kunst2Mittwoch = createLesson(kunst, DayOfWeek.WEDNESDAY,
+                H_12_40, H_13_25);
+
+        // Donnerstag
+        Lesson englischDonerstag = createLesson(englisch, DayOfWeek.THURSDAY,
+                H_08_00, H_09_30);
+        Lesson matheDonnerstag = createLesson(mathe, DayOfWeek.THURSDAY,
+                H_10_00, H_11_30);
+        Lesson musik1Donnerstag = createLesson(musik, DayOfWeek.THURSDAY,
+                H_11_50, H_12_35);
+        Lesson musik2Donnerstag = createLesson(musik, DayOfWeek.THURSDAY,
+                H_12_40, H_13_25);
+
+        // Freitag
+        Lesson lernenLernenFreitag = createLesson(lernenLernen,
+                DayOfWeek.FRIDAY, H_08_00, H_09_30);
+        Lesson englischFreitag = createLesson(englisch, DayOfWeek.FRIDAY,
+                H_10_00, H_11_30);
+        Lesson sportFreitag = createLesson(sport, DayOfWeek.FRIDAY, H_11_50,
+                H_12_35);
+        Lesson klassenratFreitag = createLesson(klassenrat, DayOfWeek.FRIDAY,
+                H_12_40, H_13_25);
+
         schoolClassRepository.save(schoolClass);
         return schoolClass;
     }

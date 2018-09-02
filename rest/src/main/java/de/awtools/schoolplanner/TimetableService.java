@@ -1,7 +1,6 @@
 package de.awtools.schoolplanner;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -13,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import de.awtools.schoolplanner.school.SchoolClassRepository;
 import de.awtools.schoolplanner.school.Course;
-import de.awtools.schoolplanner.school.SchoolClass;
+import de.awtools.schoolplanner.school.Lesson;
+import de.awtools.schoolplanner.school.SchoolService;
 
 @RestController
 @RequestMapping("/timetable")
@@ -29,7 +28,7 @@ public class TimetableService {
 	// ------------------------------------------------------------------------
 
 	@Autowired
-	private SchoolClassRepository classRepository;
+	private SchoolService schoolService;
 	
 	@Transactional
 	@CrossOrigin
@@ -41,12 +40,15 @@ public class TimetableService {
 	@Transactional
 	@CrossOrigin
 	@RequestMapping(value = "/school/{schoolId}/class/{classId}/course/today", method = RequestMethod.GET)
-	public List<String> findCoursesForToday(@PathVariable("schoolId") String schoolId,
+	public List<Lesson> findLessonsForToday(@PathVariable("schoolId") String schoolId,
 			@PathVariable("classId") String classId) {
 
-		Optional<SchoolClass> clazz = classRepository.findById(4711L);
-		
-		return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
+	    
+	    schoolService.findSchoolClass(schoolId, schoolClassId);
+	    
+
+	    return null;
+		// return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
 	}
 
 	@CrossOrigin
