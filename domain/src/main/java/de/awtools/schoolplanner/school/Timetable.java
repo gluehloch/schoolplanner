@@ -57,6 +57,7 @@ public class Timetable {
 	}
 	
 	public void addLesson(Lesson lesson) {
+	    lesson.setTimetable(this);
 	    lessons.add(lesson);
 	}
 
