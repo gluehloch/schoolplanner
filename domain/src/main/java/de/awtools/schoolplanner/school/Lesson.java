@@ -42,6 +42,7 @@ public class Lesson {
     @Enumerated(EnumType.STRING)
     private DayOfWeek dayOfWeek;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "timetable_ref")
     private Timetable timetable;
