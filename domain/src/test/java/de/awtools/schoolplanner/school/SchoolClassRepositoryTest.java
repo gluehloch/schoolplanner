@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import de.awtools.schoolplanner.ExampleDataService;
 import de.awtools.schoolplanner.PersistenceJPAConfig;
 
 @ExtendWith(SpringExtension.class)
@@ -18,11 +19,11 @@ import de.awtools.schoolplanner.PersistenceJPAConfig;
 public class SchoolClassRepositoryTest {
 
     @Autowired
-    private SchoolService schoolService;
+    private ExampleDataService exampleDataService;
 
     @Test
     public void findSchoolClass() {
-        schoolService.createSchoolClass();
+        exampleDataService.createSchoolClass();
     }
 
 }
