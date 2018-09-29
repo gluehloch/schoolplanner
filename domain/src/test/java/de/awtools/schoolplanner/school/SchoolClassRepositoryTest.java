@@ -2,6 +2,7 @@ package de.awtools.schoolplanner.school;
 
 import javax.transaction.Transactional;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,14 @@ public class SchoolClassRepositoryTest {
     @Autowired
     private ExampleDataService exampleDataService;
 
+    /**
+     * Testdaten werden mit einem {@code commit} in die Datenbank geschrieben.
+     * Nur selektiv und manuell ausfuehren. 
+     */
+    @Disabled
     @Test
-    public void findSchoolClass() {
+    @Rollback(false)
+    public void createExample() {
         exampleDataService.createSchoolClass();
     }
 
