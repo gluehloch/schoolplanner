@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,13 +25,11 @@ public class SchoolClass {
 	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 
-	@NotNull
-	@Column(name = "name")
-	private String name;
+	@Embedded
+	private ClassName name;
 
-	@NotNull
-	@Column(name = "year")
-	private String year;
+	@Embedded
+	private ClassYear year;
 
 	@ManyToOne
 	@JoinColumn(name = "teacher_ref")
@@ -53,19 +52,19 @@ public class SchoolClass {
 		this.id = id;
 	}
 
-	public String getName() {
+	public ClassName getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(ClassName name) {
 		this.name = name;
 	}
 
-	public String getYear() {
+	public ClassYear getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(ClassYear year) {
 		this.year = year;
 	}
 

@@ -121,8 +121,8 @@ public class SchoolService {
             School school, Teacher teacher) {
 
         SchoolClass schoolClass = new SchoolClass();
-        schoolClass.setYear(year);
-        schoolClass.setName(name);
+        schoolClass.setYear(new ClassYear(year));
+        schoolClass.setName(new ClassName(name));
         schoolClass.setTeacher(teacher);
         schoolClass.setSchool(school);
         schoolClassRepository.save(schoolClass);
