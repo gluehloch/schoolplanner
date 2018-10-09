@@ -3,19 +3,17 @@ package de.awtools.schoolplanner.school;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class Person {
 
-	@NotNull
-	@Column(name = "name")
-	private String name;
+    @Embedded
+	private Name name;
 
-	@NotNull
-	@Column(name = "firstname")
-	private String firstname;
+    @Embedded
+ 	private Firstname firstname;
 
 	@Column(name = "birthday")
 	private LocalDate birthday;
@@ -26,19 +24,19 @@ public abstract class Person {
 	@Column(name = "email")
 	private String email;
 
-	public String getName() {
+	public Name getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 
-	public String getFirstname() {
+	public Firstname getFirstname() {
 		return firstname;
 	}
 
-	public void setFirstname(String firstname) {
+	public void setFirstname(Firstname firstname) {
 		this.firstname = firstname;
 	}
 

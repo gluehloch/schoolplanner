@@ -5,8 +5,11 @@ import java.time.LocalTime;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import de.awtools.schoolplanner.school.Course;
 import de.awtools.schoolplanner.school.Lesson;
@@ -17,6 +20,7 @@ import de.awtools.schoolplanner.school.Student;
 import de.awtools.schoolplanner.school.Teacher;
 import de.awtools.schoolplanner.school.Timetable;
 
+@Component
 public class ExampleDataService {
 
     private static final LocalTime H_13_25 = LocalTime.of(13, 25);
@@ -29,11 +33,15 @@ public class ExampleDataService {
     private static final LocalTime H_09_30 = LocalTime.of(9, 30);
     private static final LocalTime H_08_00 = LocalTime.of(8, 0);
 
+    private static final Logger logger = LogManager.getLogger(ExampleDataService.class);
+
     @Autowired
     private SchoolService schoolService;
 
     @Transactional
     public SchoolClass createSchoolClass() {
+        logger.info("Start creating example data ...");        
+        
         School school = schoolService.createSchool("AVH",
                 "Alexander von Humboldt Gymnasium");
         Teacher teacher = schoolService.createTeacher("Letpery", "Murphy", null,

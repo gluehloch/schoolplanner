@@ -2,9 +2,6 @@ package de.awtools.schoolplanner;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import de.awtools.schoolplanner.school.Course;
 import de.awtools.schoolplanner.school.Lesson;
 import de.awtools.schoolplanner.school.LessonRepository;
-import de.awtools.schoolplanner.school.SchoolClass;
 import de.awtools.schoolplanner.school.SchoolService;
 
 
@@ -39,27 +35,27 @@ public class TimetableService {
 	@Autowired
 	private LessonRepository lessonRepository;
 
-	@Transactional
 	@CrossOrigin
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public Course createCourse(@RequestBody Course course) {
 		return course;
 	}
 	
-	@Transactional
 	@CrossOrigin
 	@GetMapping(value = "/school/{schoolId}/class/{classId}/course/today")
 	public List<Lesson> findCoursesForToday(@PathVariable("schoolId") String schoolId,
 			@PathVariable("classId") String classId) {
 
-	    Optional<SchoolClass> clazz = schoolService.findSchoolClass(4711);
+	    // Optional<SchoolClass> clazz = schoolService.findSchoolClass();
 	    
 		// classRepository.findById(4711L);
 		LocalDateTime now = LocalDateTime.now();
 		
-		List<Lesson> lessons = lessonRepository.findToday(now.getDayOfWeek());
+		// List<Lesson> lessons = lessonRepository.findToday(now.getDayOfWeek());
 
-		return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
+		// return List.of("Andre", "Lars", "Adam", "Erwin", "Christine", "Spike");
+		
+		return null;
 	}
 
 	@CrossOrigin

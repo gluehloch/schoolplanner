@@ -14,6 +14,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolService {
 
+    private static final String COURSE_S_IS_ALREADY_DEFINED = "Course [%s] is already defined!";
+
+    private static final String THE_STUDENT_S_S_BIRTHDAY_S = "The student [%s, %s Birthday: %s]";
+
+    private static final String THE_TEACHER_S_S_BIRTHDAY_S = "The teacher [%s, %s Birthday: %s]";
+
+    private static final String SCHOOL_S_IS_ALREADY_DEFINED = "School [%s] is already defined!";
+
     @Autowired
     private SchoolClassRepository schoolClassRepository;
 
@@ -38,7 +46,7 @@ public class SchoolService {
     public SchoolClass findSchoolClass() {
         return null;
     }
-    
+
     @Transactional
     public School createSchool(String shortname, String name) {
         List<School> schools = schoolRepository.findByShortName(shortname);
@@ -50,8 +58,8 @@ public class SchoolService {
             School save = schoolRepository.save(school);
             return save;
         } else {
-            throw new IllegalArgumentException(String
-                    .format("School [%s] is already defined!", shortname));
+            throw new IllegalArgumentException(
+                    String.format(SCHOOL_S_IS_ALREADY_DEFINED, shortname));
         }
     }
 
@@ -60,12 +68,13 @@ public class SchoolService {
             LocalDate birthday, String telephone, String email) {
 
         List<Teacher> teachers = teacherRepository
-                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
+                .findByFirstnameAndNameAndBirthday(new Firstname(firstname),
+                        new Name(name), birthday);
 
         if (teachers.isEmpty()) {
             Teacher teacher = new Teacher();
-            teacher.setFirstname(firstname);
-            teacher.setName(name);
+            teacher.setFirstname(new Firstname(firstname));
+            teacher.setName(new Name(name));
             teacher.setEmail(email);
             teacher.setTelephone(telephone);
             teacher.setBirthday(birthday);
@@ -73,7 +82,7 @@ public class SchoolService {
             return save;
         } else {
             throw new IllegalArgumentException(String.format(
-                    "The teacher [%s, %s Birthday: %s]", name, firstname,
+                    THE_TEACHER_S_S_BIRTHDAY_S, name, firstname,
                     birthday == null ? "undefined"
                             : DateTimeFormatter.ISO_LOCAL_DATE
                                     .format(birthday)));
@@ -85,12 +94,13 @@ public class SchoolService {
             LocalDate birthday, String telephone, String email) {
 
         List<Student> students = studentRepository
-                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
+                .findByFirstnameAndNameAndBirthday(new Firstname(firstname),
+                        new Name(name), birthday);
 
         if (students.isEmpty()) {
             Student teacher = new Student();
-            teacher.setFirstname(firstname);
-            teacher.setName(name);
+            teacher.setFirstname(new Firstname(firstname));
+            teacher.setName(new Name(name));
             teacher.setEmail(email);
             teacher.setTelephone(telephone);
             teacher.setBirthday(birthday);
@@ -98,7 +108,7 @@ public class SchoolService {
             return save;
         } else {
             throw new IllegalArgumentException(String.format(
-                    "The student [%s, %s Birthday: %s]", name, firstname,
+                    THE_STUDENT_S_S_BIRTHDAY_S, name, firstname,
                     birthday == null ? "undefined"
                             : DateTimeFormatter.ISO_LOCAL_DATE
                                     .format(birthday)));
@@ -129,8 +139,8 @@ public class SchoolService {
             courseRepository.save(course);
             return course;
         } else {
-            throw new IllegalArgumentException(String
-                    .format("Course [%s] is already defined!", shortName));
+            throw new IllegalArgumentException(
+                    String.format(COURSE_S_IS_ALREADY_DEFINED, shortName));
         }
     }
 

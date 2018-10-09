@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends CrudRepository<Student, Long> {
 
-    List<Student> findByFirstnameAndNameAndBirthday(String firstname,
-            String name, LocalDate birthday);
+    List<Student> findByFirstnameAndNameAndBirthday(Firstname firstname,
+            Name name, LocalDate birthday);
 
 }
