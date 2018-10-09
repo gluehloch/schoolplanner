@@ -1,12 +1,8 @@
 package de.awtools.schoolplanner.school;
 
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,18 +25,14 @@ public class Lesson {
     @JoinColumn(name = "course_ref")
     private Course course;
 
-    @NotNull
-    @Column(name = "starttime")
-    private LocalTime startTime;
+    @Embedded
+    private LessonStartTime startTime;
 
-    @NotNull
-    @Column(name = "endtime")
-    private LocalTime endTime;
+    @Embedded
+    private LessonEndTime endTime;
 
-    @NotNull
-    @Column(name = "dayofweek")
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek dayOfWeek;
+    @Embedded
+    private LessonDayOfWeek dayOfWeek;
 
     @NotNull
     @ManyToOne
@@ -63,27 +55,27 @@ public class Lesson {
         this.course = course;
     }
 
-    public LocalTime getStartTime() {
+    public LessonStartTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
+    public void setStartTime(LessonStartTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalTime getEndTime() {
+    public LessonEndTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalTime endTime) {
+    public void setEndTime(LessonEndTime endTime) {
         this.endTime = endTime;
     }
 
-    public DayOfWeek getDayOfWeek() {
+    public LessonDayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+    public void setDayOfWeek(LessonDayOfWeek dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 

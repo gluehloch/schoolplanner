@@ -131,12 +131,13 @@ public class SchoolService {
 
     @Transactional
     public Course createCourse(String shortName, String name) {
-        List<Course> courses = courseRepository.findByShortName(shortName);
+        List<Course> courses = courseRepository
+                .findByShortName(new CourseShortName(shortName));
 
         if (courses.isEmpty()) {
             Course course = new Course();
-            course.setShortName(shortName);
-            course.setName(name);
+            course.setShortName(new CourseShortName(shortName));
+            course.setName(new CourseName(name));
             courseRepository.save(course);
             return course;
         } else {
@@ -150,10 +151,10 @@ public class SchoolService {
             LocalTime startTime, LocalTime endTime) {
 
         Lesson lesson = new Lesson();
-        lesson.setStartTime(startTime);
-        lesson.setEndTime(endTime);
+        lesson.setStartTime(new LessonStartTime(startTime));
+        lesson.setEndTime(new LessonEndTime(endTime));
         lesson.setCourse(course);
-        lesson.setDayOfWeek(dayOfWeek);
+        lesson.setDayOfWeek(new LessonDayOfWeek(dayOfWeek));
         lessonRepository.save(lesson);
         return lesson;
     }

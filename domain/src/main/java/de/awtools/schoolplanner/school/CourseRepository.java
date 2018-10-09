@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Long> {
 
-    List<Course> findByShortName(String shortName);
+    List<Course> findByShortName(CourseShortName shortName);
 
 }
