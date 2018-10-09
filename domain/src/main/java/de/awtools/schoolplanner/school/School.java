@@ -1,12 +1,12 @@
 package de.awtools.schoolplanner.school;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "school")
@@ -17,13 +17,11 @@ public class School {
 	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 
-	@NotNull
-	@Column(name = "shortname")
-	private String shortName;
+	@Embedded
+	private SchoolShortName shortName;
 
-	@NotNull
-	@Column(name = "name")
-	private String name;
+	@Embedded
+	private SchoolName name;
 
 	public Long getId() {
 		return id;
@@ -33,19 +31,19 @@ public class School {
 		this.id = id;
 	}
 
-	public String getShortName() {
+	public SchoolShortName getShortName() {
 		return shortName;
 	}
 
-	public void setShortName(String shortName) {
+	public void setShortName(SchoolShortName shortName) {
 		this.shortName = shortName;
 	}
 
-	public String getName() {
+	public SchoolName getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(SchoolName name) {
 		this.name = name;
 	}
 

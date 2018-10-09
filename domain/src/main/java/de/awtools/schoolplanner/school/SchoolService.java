@@ -49,12 +49,13 @@ public class SchoolService {
 
     @Transactional
     public School createSchool(String shortname, String name) {
-        List<School> schools = schoolRepository.findByShortName(shortname);
+        List<School> schools = schoolRepository
+                .findByShortName(new SchoolShortName(shortname));
 
         if (schools.isEmpty()) {
             School school = new School();
-            school.setShortName(shortname);
-            school.setName(name);
+            school.setShortName(new SchoolShortName(shortname));
+            school.setName(new SchoolName(name));
             School save = schoolRepository.save(school);
             return save;
         } else {
@@ -69,15 +70,15 @@ public class SchoolService {
 
         List<Teacher> teachers = teacherRepository
                 .findByFirstnameAndNameAndBirthday(new Firstname(firstname),
-                        new Name(name), birthday);
+                        new Name(name), new Birthday(birthday));
 
         if (teachers.isEmpty()) {
             Teacher teacher = new Teacher();
             teacher.setFirstname(new Firstname(firstname));
             teacher.setName(new Name(name));
-            teacher.setEmail(email);
-            teacher.setTelephone(telephone);
-            teacher.setBirthday(birthday);
+            teacher.setEmail(new Email(email));
+            teacher.setTelephone(new Telephone(telephone));
+            teacher.setBirthday(new Birthday(birthday));
             Teacher save = teacherRepository.save(teacher);
             return save;
         } else {
@@ -95,15 +96,15 @@ public class SchoolService {
 
         List<Student> students = studentRepository
                 .findByFirstnameAndNameAndBirthday(new Firstname(firstname),
-                        new Name(name), birthday);
+                        new Name(name), new Birthday(birthday));
 
         if (students.isEmpty()) {
             Student teacher = new Student();
             teacher.setFirstname(new Firstname(firstname));
             teacher.setName(new Name(name));
-            teacher.setEmail(email);
-            teacher.setTelephone(telephone);
-            teacher.setBirthday(birthday);
+            teacher.setEmail(new Email(email));
+            teacher.setTelephone(new Telephone(telephone));
+            teacher.setBirthday(new Birthday(birthday));
             Student save = studentRepository.save(teacher);
             return save;
         } else {

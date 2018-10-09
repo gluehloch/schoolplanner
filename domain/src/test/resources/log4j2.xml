@@ -13,7 +13,7 @@
 		<Logger name="org.hibernate.SQL" level="debug">
 			<AppenderRef ref="Console" />
 		</Logger>
-        <Logger name="org.hibernate.type" level="trace">
+        <Logger name="org.hibernate.type" level="debug">
             <AppenderRef ref="Console" />
         </Logger>
 	</Loggers>

@@ -1,8 +1,5 @@
 package de.awtools.schoolplanner.school;
 
-import java.time.LocalDate;
-
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
@@ -15,14 +12,14 @@ public abstract class Person {
     @Embedded
  	private Firstname firstname;
 
-	@Column(name = "birthday")
-	private LocalDate birthday;
+    @Embedded
+	private Birthday birthday;
 
-	@Column(name = "telephone")
-	private String telephone;
+    @Embedded
+	private Telephone telephone;
 
-	@Column(name = "email")
-	private String email;
+	@Embedded
+	private Email email;
 
 	public Name getName() {
 		return name;
@@ -40,27 +37,27 @@ public abstract class Person {
 		this.firstname = firstname;
 	}
 
-	public LocalDate getBirthday() {
+	public Birthday getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(Birthday birthday) {
 		this.birthday = birthday;
 	}
 
-	public String getTelephone() {
+	public Telephone getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(String telephone) {
+	public void setTelephone(Telephone telephone) {
 		this.telephone = telephone;
 	}
 
-	public String getEmail() {
+	public Email getEmail() {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(Email email) {
 		this.email = email;
 	}
 
