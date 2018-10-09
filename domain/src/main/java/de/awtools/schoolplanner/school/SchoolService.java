@@ -48,14 +48,13 @@ public class SchoolService {
     }
 
     @Transactional
-    public School createSchool(String shortname, String name) {
-        List<School> schools = schoolRepository
-                .findByShortName(new SchoolShortName(shortname));
+    public School createSchool(SchoolShortName shortname, SchoolName name) {
+        List<School> schools = schoolRepository.findByShortName(shortname);
 
         if (schools.isEmpty()) {
             School school = new School();
-            school.setShortName(new SchoolShortName(shortname));
-            school.setName(new SchoolName(name));
+            school.setShortName(shortname);
+            school.setName(name);
             School save = schoolRepository.save(school);
             return save;
         } else {

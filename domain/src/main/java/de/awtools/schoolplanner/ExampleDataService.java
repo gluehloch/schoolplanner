@@ -15,7 +15,9 @@ import de.awtools.schoolplanner.school.Course;
 import de.awtools.schoolplanner.school.Lesson;
 import de.awtools.schoolplanner.school.School;
 import de.awtools.schoolplanner.school.SchoolClass;
+import de.awtools.schoolplanner.school.SchoolName;
 import de.awtools.schoolplanner.school.SchoolService;
+import de.awtools.schoolplanner.school.SchoolShortName;
 import de.awtools.schoolplanner.school.Student;
 import de.awtools.schoolplanner.school.Teacher;
 import de.awtools.schoolplanner.school.Timetable;
@@ -33,17 +35,19 @@ public class ExampleDataService {
     private static final LocalTime H_09_30 = LocalTime.of(9, 30);
     private static final LocalTime H_08_00 = LocalTime.of(8, 0);
 
-    private static final Logger logger = LogManager.getLogger(ExampleDataService.class);
+    private static final Logger logger = LogManager
+            .getLogger(ExampleDataService.class);
 
     @Autowired
     private SchoolService schoolService;
 
     @Transactional
     public SchoolClass createSchoolClass() {
-        logger.info("Start creating example data ...");        
-        
-        School school = schoolService.createSchool("AVH",
-                "Alexander von Humboldt Gymnasium");
+        logger.info("Start creating example data ...");
+
+        School school = schoolService.createSchool(new SchoolShortName("AVH"),
+                new SchoolName("Alexander von Humboldt Gymnasium"));
+
         Teacher teacher = schoolService.createTeacher("Letpery", "Murphy", null,
                 null,
                 "pf@avh.hamburg");
