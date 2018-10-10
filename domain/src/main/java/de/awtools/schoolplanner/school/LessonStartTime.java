@@ -28,4 +28,9 @@ public class LessonStartTime {
         this.startTime = startTime;
     }
 
+    @Override
+    public String toString() {
+        return "LessonStartTime [startTime=" + startTime + "]";
+    }
+
 }

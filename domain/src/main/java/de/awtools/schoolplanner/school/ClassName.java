@@ -26,4 +26,9 @@ public class ClassName {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "ClassName [name=" + name + "]";
+    }
+
 }

@@ -13,17 +13,22 @@ public class Birthday {
 
     public Birthday() {
     }
-    
+
     public Birthday(LocalDate birthday) {
         this.birthday = birthday;
     }
-    
+
     public LocalDate getBirthday() {
         return birthday;
     }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Birthday [birthday=" + birthday + "]";
     }
 
 }

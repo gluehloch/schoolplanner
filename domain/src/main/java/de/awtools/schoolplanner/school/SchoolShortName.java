@@ -26,4 +26,9 @@ public class SchoolShortName {
         this.shortName = shortName;
     }
 
+    @Override
+    public String toString() {
+        return "SchoolShortName [shortName=" + shortName + "]";
+    }
+
 }

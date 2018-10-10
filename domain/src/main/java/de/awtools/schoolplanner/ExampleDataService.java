@@ -113,141 +113,137 @@ public class ExampleDataService {
                 courseShortName("KS"),
                 courseName("Klassenrat"));
 
+        Timetable timetable = schoolService.createTimetable(schoolClass);
+
         // Montag
         Lesson deutschMontag = schoolService.createLesson(
+                timetable,
                 deutsch,
                 lessonDayOfWeek(DayOfWeek.MONDAY),
                 lessonStartTime(H_08_00),
                 lessonEndTime(H_09_30));
         Lesson religionMontag = schoolService.createLesson(
+                timetable,
                 religion,
                 lessonDayOfWeek(DayOfWeek.MONDAY),
                 lessonStartTime(H_10_00),
                 lessonEndTime(H_11_30));
         Lesson englischMontag = schoolService.createLesson(
+                timetable,
                 englisch,
                 lessonDayOfWeek(DayOfWeek.MONDAY),
                 lessonStartTime(H_11_50),
                 lessonEndTime(H_12_35));
         Lesson technikMontag = schoolService.createLesson(
+                timetable,
                 technik,
                 lessonDayOfWeek(DayOfWeek.MONDAY),
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_14_10));
 
-        Timetable timetable = schoolService.createTimetable(schoolClass);
-        timetable.addLesson(deutschMontag);
-        timetable.addLesson(religionMontag);
-        timetable.addLesson(englischMontag);
-        timetable.addLesson(technikMontag);
-
         // Dienstag
         Lesson matheDienstag = schoolService.createLesson(
+                timetable,
                 mathe,
                 lessonDayOfWeek(DayOfWeek.TUESDAY),
                 lessonStartTime(H_08_00),
                 lessonEndTime(H_09_30));
         Lesson deutschDienstag = schoolService.createLesson(
+                timetable,
                 deutsch,
                 lessonDayOfWeek(DayOfWeek.TUESDAY),
                 lessonStartTime(H_10_00),
                 lessonEndTime(H_11_30));
         Lesson geographie1Dienstag = schoolService.createLesson(
+                timetable,
                 geographie,
                 lessonDayOfWeek(DayOfWeek.TUESDAY),
                 lessonStartTime(H_11_50),
                 lessonEndTime(H_12_35));
         Lesson geographie2Dienstag = schoolService.createLesson(
+                timetable,
                 geographie,
                 lessonDayOfWeek(DayOfWeek.TUESDAY),
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_13_25));
         
-        timetable.addLesson(matheDienstag);
-        timetable.addLesson(deutschDienstag);
-        timetable.addLesson(geographie1Dienstag);
-        timetable.addLesson(geographie2Dienstag);
-
         // Mittwoch
         Lesson biologieMittwoch = schoolService.createLesson(
+                timetable,
                 biologie,
                 lessonDayOfWeek(DayOfWeek.WEDNESDAY),
                 lessonStartTime(H_08_00),
                 lessonEndTime(H_09_30));
         Lesson sportMittwoch = schoolService.createLesson(
+                timetable,
                 sport,
                 lessonDayOfWeek(DayOfWeek.WEDNESDAY),
                 lessonStartTime(H_10_00),
                 lessonEndTime(H_11_30));
         Lesson kunst1Mittwoch = schoolService.createLesson(
+                timetable,
                 kunst,
                 lessonDayOfWeek(DayOfWeek.WEDNESDAY),
                 lessonStartTime(H_11_50),
                 lessonEndTime(H_12_35));
         Lesson kunst2Mittwoch = schoolService.createLesson(
+                timetable,
                 kunst,
                 lessonDayOfWeek(DayOfWeek.WEDNESDAY),
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_13_25));
-
-        timetable.addLesson(biologieMittwoch);
-        timetable.addLesson(sportMittwoch);
-        timetable.addLesson(kunst1Mittwoch);
-        timetable.addLesson(kunst2Mittwoch);
         
         // Donnerstag
         Lesson englischDonerstag = schoolService.createLesson(
+                timetable,
                 englisch,
                 lessonDayOfWeek(DayOfWeek.THURSDAY),
                 lessonStartTime(H_08_00),
                 lessonEndTime(H_09_30));
         Lesson matheDonnerstag = schoolService.createLesson(
+                timetable,
                 mathe,
                 lessonDayOfWeek(DayOfWeek.THURSDAY),
                 lessonStartTime(H_10_00),
                 lessonEndTime(H_11_30));
         Lesson musik1Donnerstag = schoolService.createLesson(
+                timetable,
                 musik,
                 lessonDayOfWeek(DayOfWeek.THURSDAY),
                 lessonStartTime(H_11_50),
                 lessonEndTime(H_12_35));
         Lesson musik2Donnerstag = schoolService.createLesson(
+                timetable,
                 musik,
                 lessonDayOfWeek(DayOfWeek.THURSDAY),
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_13_25));
-
-        timetable.addLesson(englischDonerstag);
-        timetable.addLesson(matheDonnerstag);
-        timetable.addLesson(musik1Donnerstag);
-        timetable.addLesson(musik2Donnerstag);
         
         // Freitag
         Lesson lernenLernenFreitag = schoolService.createLesson(
+                timetable,
                 lernenLernen,
                 lessonDayOfWeek(DayOfWeek.FRIDAY),
                 lessonStartTime(H_08_00),
                 lessonEndTime(H_09_30));
         Lesson englischFreitag = schoolService.createLesson(
+                timetable,
                 englisch,
                 lessonDayOfWeek(DayOfWeek.FRIDAY),
                 lessonStartTime(H_10_00),
                 lessonEndTime(H_11_30));
         Lesson sportFreitag = schoolService.createLesson(
+                timetable,
                 sport,
                 lessonDayOfWeek(DayOfWeek.FRIDAY),
                 lessonStartTime(H_11_50),
                 lessonEndTime(H_12_35));
         Lesson klassenratFreitag = schoolService.createLesson(
+                timetable,
                 klassenrat,
                 lessonDayOfWeek(DayOfWeek.FRIDAY),
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_13_25));
-
-        timetable.addLesson(lernenLernenFreitag);
-        timetable.addLesson(englischFreitag);
-        timetable.addLesson(sportFreitag);
-        timetable.addLesson(klassenratFreitag);
         
         return schoolClass;
     }

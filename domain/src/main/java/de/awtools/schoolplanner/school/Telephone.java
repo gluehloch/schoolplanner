@@ -24,4 +24,9 @@ public class Telephone {
         this.telephone = telephone;
     }
 
+    @Override
+    public String toString() {
+        return "Telephone [telephone=" + telephone + "]";
+    }
+
 }

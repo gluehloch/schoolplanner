@@ -28,7 +28,7 @@ public class SchoolClassRepositoryTest {
      */
     // @Disabled
     @Test
-    // @Rollback(false)
+    @Rollback(false)
     public void createExample() {
         exampleDataService.createSchoolClass();
     }

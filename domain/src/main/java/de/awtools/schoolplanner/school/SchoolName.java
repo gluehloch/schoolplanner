@@ -26,4 +26,9 @@ public class SchoolName {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "SchoolName [name=" + name + "]";
+    }
+
 }

@@ -18,12 +18,17 @@ public class ClassYear {
         this.year = year;
     }
     
-    String getYear() {
+    public String getYear() {
         return year;
     }
 
-    void setYear(String year) {
+    public void setYear(String year) {
         this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "ClassYear [year=" + year + "]";
     }
 
 }

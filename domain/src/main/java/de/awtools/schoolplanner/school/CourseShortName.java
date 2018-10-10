@@ -25,5 +25,10 @@ public class CourseShortName {
     public void setShortName(String shortName) {
         this.shortName = shortName;
     }
+
+    @Override
+    public String toString() {
+        return "CourseShortName [shortName=" + shortName + "]";
+    }
     
 }

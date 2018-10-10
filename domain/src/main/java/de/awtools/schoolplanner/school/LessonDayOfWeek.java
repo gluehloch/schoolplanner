@@ -31,4 +31,9 @@ public class LessonDayOfWeek {
         this.dayOfWeek = dayOfWeek;
     }
 
+    @Override
+    public String toString() {
+        return "LessonDayOfWeek [dayOfWeek=" + dayOfWeek + "]";
+    }
+
 }

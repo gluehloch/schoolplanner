@@ -26,4 +26,9 @@ public class Firstname {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "Firstname [name=" + name + "]";
+    }
+
 }
