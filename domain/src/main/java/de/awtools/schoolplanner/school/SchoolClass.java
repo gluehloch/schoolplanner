@@ -92,4 +92,10 @@ public class SchoolClass {
 		this.students = students;
 	}
 
+    @Override
+    public String toString() {
+        return "SchoolClass [id=" + id + ", name=" + name + ", year=" + year
+                + "]";
+    }
+
 }

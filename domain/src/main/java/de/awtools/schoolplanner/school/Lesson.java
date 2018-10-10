@@ -87,4 +87,11 @@ public class Lesson {
         this.timetable = timetable;
     }
 
+    @Override
+    public String toString() {
+        return "Lesson [id=" + id + ", course=" + course + ", startTime="
+                + startTime + ", endTime=" + endTime + ", dayOfWeek="
+                + dayOfWeek + "]";
+    }
+
 }

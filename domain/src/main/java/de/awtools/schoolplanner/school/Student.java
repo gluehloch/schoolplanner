@@ -24,4 +24,12 @@ public class Student extends Person {
 		this.id = id;
 	}
 
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", getName()=" + getName()
+                + ", getFirstname()=" + getFirstname() + ", getBirthday()="
+                + getBirthday() + ", getTelephone()=" + getTelephone()
+                + ", getEmail()=" + getEmail() + "]";
+    }
+
 }

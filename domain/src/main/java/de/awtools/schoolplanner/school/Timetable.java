@@ -61,4 +61,9 @@ public class Timetable {
 	    lessons.add(lesson);
 	}
 
+    @Override
+    public String toString() {
+        return "Timetable [id=" + id + ", schoolClass=" + schoolClass + "]";
+    }
+
 }

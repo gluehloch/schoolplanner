@@ -61,4 +61,11 @@ public abstract class Person {
 		this.email = email;
 	}
 
+    @Override
+    public String toString() {
+        return "Person [name=" + name + ", firstname=" + firstname
+                + ", birthday=" + birthday + ", telephone=" + telephone
+                + ", email=" + email + "]";
+    }
+
 }

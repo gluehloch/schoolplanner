@@ -245,6 +245,13 @@ public class ExampleDataService {
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_13_25));
         
+        schoolService.createLesson(
+                timetable,
+                klassenrat,
+                lessonDayOfWeek(DayOfWeek.FRIDAY),
+                lessonStartTime(H_12_40),
+                lessonEndTime(H_13_25));
+        
         return schoolClass;
     }
 

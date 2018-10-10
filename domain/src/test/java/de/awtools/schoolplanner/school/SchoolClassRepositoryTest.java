@@ -26,7 +26,7 @@ public class SchoolClassRepositoryTest {
      * Testdaten werden mit einem {@code commit} in die Datenbank geschrieben.
      * Nur selektiv und manuell ausfuehren.
      */
-    @Disabled
+    //@Disabled
     @Test
     // @Rollback(false)
     public void createExample() {

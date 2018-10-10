@@ -47,4 +47,10 @@ public class School {
 		this.name = name;
 	}
 
+    @Override
+    public String toString() {
+        return "School [id=" + id + ", shortName=" + shortName + ", name="
+                + name + "]";
+    }
+
 }
