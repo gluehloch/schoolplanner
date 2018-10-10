@@ -2,7 +2,6 @@ package de.awtools.schoolplanner.school;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -14,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SchoolService {
+
+    private static final String SCHOOL_CLASS_IS_ALREADY_DEFINED = "SchoolClass [%s, %s, %s] is already defined!";
 
     private static final String COURSE_S_IS_ALREADY_DEFINED = "Course [%s] is already defined!";
 
@@ -57,11 +58,11 @@ public class SchoolService {
     public static Birthday birthday(LocalDate birthday) {
         return new Birthday(birthday);
     }
-    
+
     public static Email email(String email) {
         return new Email(email);
     }
-    
+
     public static SchoolShortName schoolShortName(String schoolShortName) {
         return new SchoolShortName(schoolShortName);
     }
@@ -69,11 +70,11 @@ public class SchoolService {
     public static SchoolName schoolName(String schoolName) {
         return new SchoolName(schoolName);
     }
-    
+
     public static ClassName className(String className) {
         return new ClassName(className);
     }
-    
+
     public static ClassYear classYear(String classYear) {
         return new ClassYear(classYear);
     }
@@ -81,7 +82,7 @@ public class SchoolService {
     public static CourseName courseName(String courseName) {
         return new CourseName(courseName);
     }
-    
+
     public static CourseShortName courseShortName(String courseShortName) {
         return new CourseShortName(courseShortName);
     }
@@ -93,11 +94,11 @@ public class SchoolService {
     public static LessonStartTime lessonStartTime(LocalTime startTime) {
         return new LessonStartTime(startTime);
     }
-    
+
     public static LessonEndTime lessonEndTime(LocalTime endTime) {
         return new LessonEndTime(endTime);
     }
-    
+
     // ------------------------------------------------------------------------
 
     public SchoolClass findSchoolClass() {
@@ -105,74 +106,102 @@ public class SchoolService {
     }
 
     @Transactional
-    public School createSchool(SchoolShortName shortname, SchoolName name) {
-        List<School> schools = schoolRepository.findByShortName(shortname);
+    public boolean isSchoolDefined(SchoolShortName shortName) {
+        return !schoolRepository.findByShortName(shortName).isEmpty();
+    }
 
-        if (schools.isEmpty()) {
-            School school = new School();
-            school.setShortName(shortname);
-            school.setName(name);
-            School save = schoolRepository.save(school);
-            return save;
-        } else {
+    @Transactional
+    public School createSchool(SchoolShortName shortname, SchoolName name) {
+        if (isSchoolDefined(shortname)) {
             throw new IllegalArgumentException(
                     String.format(SCHOOL_S_IS_ALREADY_DEFINED, shortname));
         }
+
+        School school = new School();
+        school.setShortName(shortname);
+        school.setName(name);
+        School save = schoolRepository.save(school);
+        return save;
+    }
+
+    @Transactional
+    public boolean isTeacherDefined(Firstname firstname, Name name,
+            Birthday birthday) {
+
+        return !teacherRepository
+                .findByFirstnameAndNameAndBirthday(firstname, name, birthday)
+                .isEmpty();
     }
 
     @Transactional
     public Teacher createTeacher(Firstname firstname, Name name,
             Birthday birthday, Telephone telephone, Email email) {
 
-        List<Teacher> teachers = teacherRepository
-                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
-
-        if (teachers.isEmpty()) {
-            Teacher teacher = new Teacher();
-            teacher.setFirstname(firstname);
-            teacher.setName(name);
-            teacher.setEmail(email);
-            teacher.setTelephone(telephone);
-            teacher.setBirthday(birthday);
-            Teacher save = teacherRepository.save(teacher);
-            return save;
-        } else {
+        if (isTeacherDefined(firstname, name, birthday)) {
             throw new IllegalArgumentException(String.format(
                     THE_TEACHER_S_S_BIRTHDAY_S, name, firstname,
                     birthday == null ? "undefined"
                             : DateTimeFormatter.ISO_LOCAL_DATE
                                     .format(birthday.getBirthday())));
         }
+
+        Teacher teacher = new Teacher();
+        teacher.setFirstname(firstname);
+        teacher.setName(name);
+        teacher.setEmail(email);
+        teacher.setTelephone(telephone);
+        teacher.setBirthday(birthday);
+        Teacher save = teacherRepository.save(teacher);
+        return save;
+    }
+
+    @Transactional
+    public boolean isStudentDefined(Firstname firstname, Name name,
+            Birthday birthday) {
+
+        return !studentRepository
+                .findByFirstnameAndNameAndBirthday(firstname, name, birthday)
+                .isEmpty();
     }
 
     @Transactional
     public Student createStudent(Firstname firstname, Name name,
             Birthday birthday, Telephone telephone, Email email) {
 
-        List<Student> students = studentRepository
-                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
-
-        if (students.isEmpty()) {
-            Student teacher = new Student();
-            teacher.setFirstname(firstname);
-            teacher.setName(name);
-            teacher.setEmail(email);
-            teacher.setTelephone(telephone);
-            teacher.setBirthday(birthday);
-            Student save = studentRepository.save(teacher);
-            return save;
-        } else {
+        if (isStudentDefined(firstname, name, birthday)) {
             throw new IllegalArgumentException(String.format(
                     THE_STUDENT_S_S_BIRTHDAY_S, name, firstname,
                     birthday == null ? "undefined"
                             : DateTimeFormatter.ISO_LOCAL_DATE
                                     .format(birthday.getBirthday())));
         }
+
+        Student teacher = new Student();
+        teacher.setFirstname(firstname);
+        teacher.setName(name);
+        teacher.setEmail(email);
+        teacher.setTelephone(telephone);
+        teacher.setBirthday(birthday);
+        Student save = studentRepository.save(teacher);
+        return save;
+    }
+
+    @Transactional
+    public boolean isSchoolClassDefined(ClassName name, ClassYear year,
+            School school) {
+
+        return !schoolClassRepository
+                .findByNameAndYearAndSchool(name, year, school).isEmpty();
     }
 
     @Transactional
     public SchoolClass createSchoolClass(ClassName name, ClassYear year,
             School school, Teacher teacher) {
+
+        if (isSchoolClassDefined(name, year, school)) {
+            throw new IllegalArgumentException(String.format(
+                    SCHOOL_CLASS_IS_ALREADY_DEFINED, name, year, school));
+        }
 
         SchoolClass schoolClass = new SchoolClass();
         schoolClass.setYear(year);
