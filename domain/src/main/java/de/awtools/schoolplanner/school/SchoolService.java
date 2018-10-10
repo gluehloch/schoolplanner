@@ -2,6 +2,7 @@ package de.awtools.schoolplanner.school;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -43,6 +44,62 @@ public class SchoolService {
     @Autowired
     private TimetableRepository timetableRepository;
 
+    // -- static helper -------------------------------------------------------
+
+    public static Firstname firstname(String firstname) {
+        return new Firstname(firstname);
+    }
+
+    public static Name name(String name) {
+        return new Name(name);
+    }
+
+    public static Birthday birthday(LocalDate birthday) {
+        return new Birthday(birthday);
+    }
+    
+    public static Email email(String email) {
+        return new Email(email);
+    }
+    
+    public static SchoolShortName schoolShortName(String schoolShortName) {
+        return new SchoolShortName(schoolShortName);
+    }
+
+    public static SchoolName schoolName(String schoolName) {
+        return new SchoolName(schoolName);
+    }
+    
+    public static ClassName className(String className) {
+        return new ClassName(className);
+    }
+    
+    public static ClassYear classYear(String classYear) {
+        return new ClassYear(classYear);
+    }
+
+    public static CourseName courseName(String courseName) {
+        return new CourseName(courseName);
+    }
+    
+    public static CourseShortName courseShortName(String courseShortName) {
+        return new CourseShortName(courseShortName);
+    }
+
+    public static LessonDayOfWeek lessonDayOfWeek(DayOfWeek dayOfWeek) {
+        return new LessonDayOfWeek(dayOfWeek);
+    }
+
+    public static LessonStartTime lessonStartTime(LocalTime startTime) {
+        return new LessonStartTime(startTime);
+    }
+    
+    public static LessonEndTime lessonEndTime(LocalTime endTime) {
+        return new LessonEndTime(endTime);
+    }
+    
+    // ------------------------------------------------------------------------
+
     public SchoolClass findSchoolClass() {
         return null;
     }
@@ -64,20 +121,19 @@ public class SchoolService {
     }
 
     @Transactional
-    public Teacher createTeacher(String firstname, String name,
-            LocalDate birthday, String telephone, String email) {
+    public Teacher createTeacher(Firstname firstname, Name name,
+            Birthday birthday, Telephone telephone, Email email) {
 
         List<Teacher> teachers = teacherRepository
-                .findByFirstnameAndNameAndBirthday(new Firstname(firstname),
-                        new Name(name), new Birthday(birthday));
+                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
 
         if (teachers.isEmpty()) {
             Teacher teacher = new Teacher();
-            teacher.setFirstname(new Firstname(firstname));
-            teacher.setName(new Name(name));
-            teacher.setEmail(new Email(email));
-            teacher.setTelephone(new Telephone(telephone));
-            teacher.setBirthday(new Birthday(birthday));
+            teacher.setFirstname(firstname);
+            teacher.setName(name);
+            teacher.setEmail(email);
+            teacher.setTelephone(telephone);
+            teacher.setBirthday(birthday);
             Teacher save = teacherRepository.save(teacher);
             return save;
         } else {
@@ -85,25 +141,24 @@ public class SchoolService {
                     THE_TEACHER_S_S_BIRTHDAY_S, name, firstname,
                     birthday == null ? "undefined"
                             : DateTimeFormatter.ISO_LOCAL_DATE
-                                    .format(birthday)));
+                                    .format(birthday.getBirthday())));
         }
     }
 
     @Transactional
-    public Student createStudent(String firstname, String name,
-            LocalDate birthday, String telephone, String email) {
+    public Student createStudent(Firstname firstname, Name name,
+            Birthday birthday, Telephone telephone, Email email) {
 
         List<Student> students = studentRepository
-                .findByFirstnameAndNameAndBirthday(new Firstname(firstname),
-                        new Name(name), new Birthday(birthday));
+                .findByFirstnameAndNameAndBirthday(firstname, name, birthday);
 
         if (students.isEmpty()) {
             Student teacher = new Student();
-            teacher.setFirstname(new Firstname(firstname));
-            teacher.setName(new Name(name));
-            teacher.setEmail(new Email(email));
-            teacher.setTelephone(new Telephone(telephone));
-            teacher.setBirthday(new Birthday(birthday));
+            teacher.setFirstname(firstname);
+            teacher.setName(name);
+            teacher.setEmail(email);
+            teacher.setTelephone(telephone);
+            teacher.setBirthday(birthday);
             Student save = studentRepository.save(teacher);
             return save;
         } else {
@@ -111,17 +166,17 @@ public class SchoolService {
                     THE_STUDENT_S_S_BIRTHDAY_S, name, firstname,
                     birthday == null ? "undefined"
                             : DateTimeFormatter.ISO_LOCAL_DATE
-                                    .format(birthday)));
+                                    .format(birthday.getBirthday())));
         }
     }
 
     @Transactional
-    public SchoolClass createSchoolClass(String name, String year,
+    public SchoolClass createSchoolClass(ClassName name, ClassYear year,
             School school, Teacher teacher) {
 
         SchoolClass schoolClass = new SchoolClass();
-        schoolClass.setYear(new ClassYear(year));
-        schoolClass.setName(new ClassName(name));
+        schoolClass.setYear(year);
+        schoolClass.setName(name);
         schoolClass.setTeacher(teacher);
         schoolClass.setSchool(school);
         schoolClassRepository.save(schoolClass);
@@ -129,14 +184,14 @@ public class SchoolService {
     }
 
     @Transactional
-    public Course createCourse(String shortName, String name) {
+    public Course createCourse(CourseShortName shortName, CourseName name) {
         List<Course> courses = courseRepository
-                .findByShortName(new CourseShortName(shortName));
+                .findByShortName(shortName);
 
         if (courses.isEmpty()) {
             Course course = new Course();
-            course.setShortName(new CourseShortName(shortName));
-            course.setName(new CourseName(name));
+            course.setShortName(shortName);
+            course.setName(name);
             courseRepository.save(course);
             return course;
         } else {
@@ -146,14 +201,14 @@ public class SchoolService {
     }
 
     @Transactional
-    public Lesson createLesson(Course course, DayOfWeek dayOfWeek,
-            LocalTime startTime, LocalTime endTime) {
+    public Lesson createLesson(Course course, LessonDayOfWeek dayOfWeek,
+            LessonStartTime startTime, LessonEndTime endTime) {
 
         Lesson lesson = new Lesson();
-        lesson.setStartTime(new LessonStartTime(startTime));
-        lesson.setEndTime(new LessonEndTime(endTime));
+        lesson.setStartTime(startTime);
+        lesson.setEndTime(endTime);
         lesson.setCourse(course);
-        lesson.setDayOfWeek(new LessonDayOfWeek(dayOfWeek));
+        lesson.setDayOfWeek(dayOfWeek);
         lessonRepository.save(lesson);
         return lesson;
     }
