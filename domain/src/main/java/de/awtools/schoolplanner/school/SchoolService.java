@@ -238,12 +238,14 @@ public class SchoolService {
             LessonDayOfWeek dayOfWeek, LessonStartTime startTime,
             LessonEndTime endTime) {
 
-        Optional<Timetable> optionalTimetable = timetableRepository
+        Optional<Timetable> checkTimetable = timetableRepository
                 .findById(timetable.getId());
-        Timetable timetable2 = optionalTimetable
-                .orElseThrow(() -> new IllegalArgumentException());
+        Timetable timetable2 = checkTimetable
+                .orElseThrow(
+                        () -> new IllegalArgumentException(schoolErrorMessage
+                                .timetableIsNotDefined(timetable).getText()));
 
-        if (isLessonDefined(timetable, course, dayOfWeek, startTime)) {
+        if (isLessonDefined(timetable2, course, dayOfWeek, startTime)) {
             throwIllegalArgumentException(
                     schoolErrorMessage.lessonIsAlreadyDefined(timetable2,
                             course, dayOfWeek, startTime).getText());
@@ -256,7 +258,7 @@ public class SchoolService {
         lesson.setDayOfWeek(dayOfWeek);
         lessonRepository.save(lesson);
 
-        timetable.addLesson(lesson);
+        timetable2.addLesson(lesson);
 
         return lesson;
     }
@@ -265,7 +267,7 @@ public class SchoolService {
     public boolean isTimetableDefined(SchoolClass schoolClass) {
         return !timetableRepository.findBySchoolClass(schoolClass).isEmpty();
     }
-     
+
     @Transactional
     public Timetable createTimetable(SchoolClass schoolClass) {
         Timetable timetable = new Timetable();

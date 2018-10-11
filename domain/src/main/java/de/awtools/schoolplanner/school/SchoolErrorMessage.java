@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SchoolErrorMessage {
 
+    private static final String TIMETABLE_IS_NOT_DEFINED = "The timetable [%s, %s, %s] is not defined.";
     private static final String SCHOOL_CLASS_IS_ALREADY_DEFINED = "The schoolClass [%s, %s, %s] is already defined!";
     private static final String COURSE_IS_ALREADY_DEFINED = "The course [%s] is already defined!";
     private static final String STUDENT_IS_ALREADY_DEFINED = "The student [%s, %s %s] is already defined";
@@ -59,4 +60,11 @@ public class SchoolErrorMessage {
         return new Message(String.format(LESSON_IS_ALREADY_DEFINED, timetable,
                 course, dayOfWeek, toString(startTime)));
     }
+
+    public Message timetableIsNotDefined(Timetable timetable) {
+        return new Message(String.format(TIMETABLE_IS_NOT_DEFINED,
+                timetable.getId(), timetable.getSchoolClass().getName(),
+                timetable.getSchoolClass().getYear()));
+    }
+
 }
