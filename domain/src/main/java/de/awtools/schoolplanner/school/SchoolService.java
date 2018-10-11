@@ -3,7 +3,6 @@ package de.awtools.schoolplanner.school;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -14,17 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class SchoolService {
 
-    private static final String SCHOOL_CLASS_IS_ALREADY_DEFINED = "The schoolClass [%s, %s, %s] is already defined!";
-
-    private static final String COURSE_IS_ALREADY_DEFINED = "The course [%s] is already defined!";
-
-    private static final String THE_STUDENT_BIRTHDAY = "The student [%s, %s Birthday: %s]";
-
-    private static final String THE_TEACHER_BIRTHDAY = "The teacher [%s, %s Birthday: %s]";
-
-    private static final String SCHOOL_IS_ALREADY_DEFINED = "The school [%s] is already defined!";
-
-    private static final String LESSON_IS_ALREADY_DEFINED = "The lesson [%s, %s, %s StartTime: %s] is already defined!";
+    @Autowired
+    private SchoolErrorMessage schoolErrorMessage;
 
     @Autowired
     private SchoolClassRepository schoolClassRepository;
@@ -105,18 +95,6 @@ public class SchoolService {
         throw new IllegalArgumentException(text);
     }
 
-    private static String toString(Birthday birthday) {
-        return birthday == null ? "undefined"
-                : DateTimeFormatter.ISO_LOCAL_DATE
-                        .format(birthday.getBirthday());
-    }
-
-    private static String toString(LessonStartTime startTime) {
-        return startTime == null ? "undefined"
-                : DateTimeFormatter.ISO_LOCAL_TIME
-                        .format(startTime.getStartTime());
-    }
-
     // ------------------------------------------------------------------------
 
     public SchoolClass findSchoolClass() {
@@ -131,8 +109,8 @@ public class SchoolService {
     @Transactional
     public School createSchool(SchoolShortName shortname, SchoolName name) {
         if (isSchoolDefined(shortname)) {
-            throwIllegalArgumentException(
-                    String.format(SCHOOL_IS_ALREADY_DEFINED, shortname));
+            throwIllegalArgumentException(schoolErrorMessage
+                    .schoolIsAlreadyDefined(shortname).getText());
         }
 
         School school = new School();
@@ -156,9 +134,9 @@ public class SchoolService {
             Birthday birthday, Telephone telephone, Email email) {
 
         if (isTeacherDefined(firstname, name, birthday)) {
-            throwIllegalArgumentException(
-                    String.format(THE_TEACHER_BIRTHDAY, name, firstname,
-                            toString(birthday)));
+            throwIllegalArgumentException(schoolErrorMessage
+                    .teacherIsAlreadyDefined(firstname, name, birthday)
+                    .getText());
         }
 
         Teacher teacher = new Teacher();
@@ -185,9 +163,9 @@ public class SchoolService {
             Birthday birthday, Telephone telephone, Email email) {
 
         if (isStudentDefined(firstname, name, birthday)) {
-            throwIllegalArgumentException(
-                    String.format(THE_STUDENT_BIRTHDAY, name, firstname,
-                            toString(birthday)));
+            throwIllegalArgumentException(schoolErrorMessage
+                    .studentIsAlreadyDefined(firstname, name, birthday)
+                    .getText());
         }
 
         Student teacher = new Student();
@@ -213,8 +191,8 @@ public class SchoolService {
             School school, Teacher teacher) {
 
         if (isSchoolClassDefined(name, year, school)) {
-            throwIllegalArgumentException(String.format(
-                    SCHOOL_CLASS_IS_ALREADY_DEFINED, name, year, school));
+            throwIllegalArgumentException(schoolErrorMessage
+                    .schoolClassIsAlreadyDefined(name, year, school).getText());
         }
 
         SchoolClass schoolClass = new SchoolClass();
@@ -234,8 +212,8 @@ public class SchoolService {
     @Transactional
     public Course createCourse(CourseShortName shortName, CourseName name) {
         if (isCourseDefined(shortName)) {
-            throwIllegalArgumentException(
-                    String.format(COURSE_IS_ALREADY_DEFINED, shortName));
+            throwIllegalArgumentException(schoolErrorMessage
+                    .courseIsAlreadyDefined(shortName).getText());
         }
 
         Course course = new Course();
@@ -267,8 +245,8 @@ public class SchoolService {
 
         if (isLessonDefined(timetable, course, dayOfWeek, startTime)) {
             throwIllegalArgumentException(
-                    String.format(LESSON_IS_ALREADY_DEFINED, timetable, course,
-                            dayOfWeek, toString(startTime)));
+                    schoolErrorMessage.lessonIsAlreadyDefined(timetable2,
+                            course, dayOfWeek, startTime).getText());
         }
 
         Lesson lesson = new Lesson();
@@ -277,7 +255,7 @@ public class SchoolService {
         lesson.setCourse(course);
         lesson.setDayOfWeek(dayOfWeek);
         lessonRepository.save(lesson);
-        
+
         timetable.addLesson(lesson);
 
         return lesson;

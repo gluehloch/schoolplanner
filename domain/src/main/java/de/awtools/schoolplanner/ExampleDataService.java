@@ -110,7 +110,7 @@ public class ExampleDataService {
                 courseShortName("LL"),
                 courseName("LernenLernen"));
         Course klassenrat = schoolService.createCourse(
-                courseShortName("KS"),
+                courseShortName("KR"),
                 courseName("Klassenrat"));
 
         Timetable timetable = schoolService.createTimetable(schoolClass);
