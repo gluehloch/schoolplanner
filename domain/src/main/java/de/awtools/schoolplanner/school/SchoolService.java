@@ -262,6 +262,11 @@ public class SchoolService {
     }
 
     @Transactional
+    public boolean isTimetableDefined(SchoolClass schoolClass) {
+        return !timetableRepository.findBySchoolClass(schoolClass).isEmpty();
+    }
+     
+    @Transactional
     public Timetable createTimetable(SchoolClass schoolClass) {
         Timetable timetable = new Timetable();
         timetable.setSchoolClass(schoolClass);
