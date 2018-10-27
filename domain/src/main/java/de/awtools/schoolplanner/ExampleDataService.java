@@ -244,8 +244,8 @@ public class ExampleDataService {
                 lessonDayOfWeek(DayOfWeek.FRIDAY),
                 lessonStartTime(H_12_40),
                 lessonEndTime(H_13_25));
-        
+
         return schoolClass;
     }
-
+    
 }

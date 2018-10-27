@@ -26,13 +26,13 @@ public class TimetableService {
     // The beans
     // ------------------------------------------------------------------------
 
-    // ------------------------------------------------------------------------
-
     @Autowired
     private SchoolService schoolService;
 
     @Autowired
     private LessonRepository lessonRepository;
+
+    // ------------------------------------------------------------------------
 
     @CrossOrigin
     @RequestMapping(value = "", method = RequestMethod.POST)
