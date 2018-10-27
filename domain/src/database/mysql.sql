@@ -2,6 +2,9 @@
 select 'Start installation of schoolplanner 0.0.1 MySQL schema.' as INFO;
 select version();
 
+drop table user_session;
+drop table user;
+
 drop table if exists lesson;
 drop table if exists class_student;
 drop table if exists class;
