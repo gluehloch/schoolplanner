@@ -1,6 +1,7 @@
 package de.awtools.schoolplanner.security;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,7 @@ public class User {
     private String email;
 
     @NotNull
+    @Embedded
     private Password password;
 
     public Long getId() {
@@ -46,6 +48,14 @@ public class User {
 
     public void setPassword(Password password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

@@ -18,6 +18,13 @@ public class Password {
     @Size(min = 60, max = 60)
     private String password;
 
+    public Password() {
+    }
+    
+    public Password(String password) {
+        this.password = password;
+    }
+    
     public String getPassword() {
         return password;
     }

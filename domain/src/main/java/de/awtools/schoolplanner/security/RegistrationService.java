@@ -25,7 +25,9 @@ public class RegistrationService {
             String password, String passwordConfirm) {
 
         User user = new User();
-        passwordEncoder.encode(password);
+        user.setUsername(nickname);
+        user.setPassword(new Password(passwordEncoder.encode(password)));
+        user.setEmail(email);
         
         return user;
     }
