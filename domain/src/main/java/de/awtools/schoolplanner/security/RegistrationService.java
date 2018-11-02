@@ -42,7 +42,7 @@ public class RegistrationService {
 
  
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private SchoolUserDetailsService userDetailsService;
 
     @Bean
     public DaoAuthenticationProvider authProvider() {

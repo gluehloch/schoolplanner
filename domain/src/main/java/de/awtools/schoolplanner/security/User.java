@@ -38,6 +38,9 @@ public class User {
     @Column(name = "last_change")
     private LocalDateTime lastChange;
 
+    @Column(name = "enabled")
+    private boolean enabled;
+    
     @Column(name = "expired")
     private boolean expired;
 
@@ -89,6 +92,14 @@ public class User {
 
     public LocalDateTime getLastChange() {
         return lastChange;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+    
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public void setLastChange(LocalDateTime lastChange) {

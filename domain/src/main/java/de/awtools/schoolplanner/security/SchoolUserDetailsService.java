@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class SchoolUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -21,14 +21,17 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new MyUserPrincipal(user);
+        return new SchoolUserPrincipal(user);
     }
     
     
-    public static class MyUserPrincipal implements UserDetails {
+    public static class SchoolUserPrincipal implements UserDetails {
+
+        private static final long serialVersionUID = -7882416572804994114L;
+
         private User user;
 
-        public MyUserPrincipal(User user) {
+        public SchoolUserPrincipal(User user) {
             this.user = user;
         }
 
@@ -40,39 +43,34 @@ public class MyUserDetailsService implements UserDetailsService {
 
         @Override
         public String getPassword() {
-            // TODO Auto-generated method stub
-            return null;
+            return user.getPassword().get();
         }
 
         @Override
         public String getUsername() {
-            // TODO Auto-generated method stub
-            return null;
+            return user.getUsername();
         }
 
         @Override
         public boolean isAccountNonExpired() {
-            // TODO Auto-generated method stub
-            return false;
+            return !user.isExpired();
         }
 
         @Override
         public boolean isAccountNonLocked() {
-            // TODO Auto-generated method stub
-            return false;
+            return !user.isLocked();
         }
 
         @Override
         public boolean isCredentialsNonExpired() {
-            // TODO Auto-generated method stub
-            return false;
+            return !user.isCredentialExpired();
         }
 
         @Override
         public boolean isEnabled() {
-            // TODO Auto-generated method stub
-            return false;
+            return user.isEnabled();
         }
-    }    
+    }
+
 }
 

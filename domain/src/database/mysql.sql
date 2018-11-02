@@ -12,6 +12,7 @@ create table user (
     email varchar(50) not null,
     created datetime not null,
     last_change datetime comment 'Last password change',
+    enabled bit comment 'account enabled',
     expired bit comment 'password expired',
     locked bit comment 'account locked',
     credential_expired bit comment 'credential expired?',
