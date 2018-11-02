@@ -15,6 +15,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -23,6 +25,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan("de.awtools.schoolplanner")
 @EnableJpaRepositories(basePackages = { "de.awtools.schoolplanner" })
 public class PersistenceJPAConfig {
+
+    // TODO Move to another Configuration class?
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {

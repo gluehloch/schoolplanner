@@ -40,7 +40,7 @@
     </dependencies>
 
     <properties>
-        <org.springframework.version>5.0.8.RELEASE</org.springframework.version>
+        <org.springframework.version>5.1.1.RELEASE</org.springframework.version>
         <org.hibernate.version>5.3.5.Final</org.hibernate.version>
         <!-- <failOnMissingWebXml>false</failOnMissingWebXml> -->
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
