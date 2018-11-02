@@ -2,8 +2,36 @@
 select 'Start installation of schoolplanner 0.0.1 MySQL schema.' as INFO;
 select version();
 
-drop table user_session;
-drop table user;
+drop table if exists user_session;
+drop table if exists user;
+
+create table user (
+    id bigint not null auto_increment,
+    username varchar(20) not null unique,
+    password varchar(60) not null,
+    created datetime not null,
+    last_change datetime comment 'Last password change',
+    expired bit comment 'password expired',
+    locked bit comment 'account locked',
+    credential_expired bit comment 'credential expired?',
+    primary key(id)
+) ENGINE=InnoDB;
+
+create table user_session (
+    id bigint not null auto_increment,
+    user_ref bigint,
+    token varchar(2048) not null comment 'Session Token',
+    login datetime comment 'Login date and time',
+    logout datetime comment 'Logout date and time',
+    remoteaddress varchar(30) comment 'IP address',
+    browser varchar(200) comment 'Browser',
+    primary key(id)
+) ENGINE=InnoDB;
+
+alter table user_session
+    add constraint fk_user_session_user
+    foreign key (user_ref)
+    references user(id);
 
 drop table if exists lesson;
 drop table if exists class_student;
@@ -19,7 +47,7 @@ create table lesson (
     id bigint not null auto_increment,
     starttime time,
     endtime time,
-    dayofweek VARCHAR(10),
+    dayofweek varchar(10),
     course_ref bigint,
     timetable_ref bigint, 
     primary key(id)
@@ -27,15 +55,15 @@ create table lesson (
 
 create table school (
     id bigint not null auto_increment,
-    shortname VARCHAR(20) not null unique,
-    name VARCHAR(100) not null,
+    shortname varchar(20) not null unique,
+    name varchar(100) not null,
     primary key(id)
 ) ENGINE=InnoDB;
 
 create table course (
     id bigint not null auto_increment,
-    shortname VARCHAR(20) not null unique,
-    name VARCHAR(100),
+    shortname varchar(20) not null unique,
+    name varchar(100),
     primary key(id)
 ) ENGINE=InnoDB;
 
@@ -47,8 +75,8 @@ create table timetable (
 
 create table schoolclass (
     id bigint not null auto_increment,
-    name VARCHAR(10) not null,
-    year VARCHAR(50) not null,
+    name varchar(10) not null,
+    year varchar(50) not null,
     teacher_ref bigint,
     school_ref bigint not null,
     primary key(id)
@@ -64,21 +92,21 @@ create table class_student (
 
 create table student (
     id bigint not null auto_increment,
-    name VARCHAR(50) not null,
-    firstname VARCHAR(50) not null,
-    telephone VARCHAR(50),
+    name varchar(50) not null,
+    firstname varchar(50) not null,
+    telephone varchar(50),
     birthday datetime,
-    email VARCHAR(50),
+    email varchar(50),
     primary key(id)
 ) ENGINE=InnoDB;
 
 create table teacher (
     id bigint not null auto_increment,
-    name VARCHAR(50) not null,
-    firstname VARCHAR(50) not null,
-    telephone VARCHAR(50),
+    name varchar(50) not null,
+    firstname varchar(50) not null,
+    telephone varchar(50),
     birthday datetime,
-    email VARCHAR(50),
+    email varchar(50),
     primary key(id)
  ) ENGINE=InnoDB;
 

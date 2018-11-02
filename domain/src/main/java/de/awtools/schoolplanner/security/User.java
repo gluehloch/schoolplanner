@@ -16,10 +16,13 @@ public class User {
     @NotNull
     @Column(name = "username")
     private String username;
+    
+    @NotNull
+    @Column(name = "email")
+    private String email;
 
     @NotNull
-    @Column(name = "password")
-    private String password;
+    private Password password;
 
     public Long getId() {
         return id;
@@ -37,11 +40,11 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
+    public Password getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Password password) {
         this.password = password;
     }
 
