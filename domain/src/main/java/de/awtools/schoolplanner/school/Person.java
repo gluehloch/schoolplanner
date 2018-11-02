@@ -1,10 +1,12 @@
 package de.awtools.schoolplanner.school;
 
+import java.util.Formattable;
+
 import javax.persistence.Embedded;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Person {
+public abstract class Person implements Formattable {
 
     @Embedded
 	private Name name;
