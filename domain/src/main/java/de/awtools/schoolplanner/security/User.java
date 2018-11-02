@@ -1,12 +1,18 @@
 package de.awtools.schoolplanner.security;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "user")
 public class User {
 
     @Id
@@ -17,7 +23,7 @@ public class User {
     @NotNull
     @Column(name = "username")
     private String username;
-    
+
     @NotNull
     @Column(name = "email")
     private String email;
@@ -25,6 +31,21 @@ public class User {
     @NotNull
     @Embedded
     private Password password;
+
+    @Column(name = "created")
+    private LocalDateTime created;
+
+    @Column(name = "last_change")
+    private LocalDateTime lastChange;
+
+    @Column(name = "expired")
+    private boolean expired;
+
+    @Column(name = "locked")
+    private boolean locked;
+
+    @Column(name = "credential_expired")
+    private boolean credentialExpired;
 
     public Long getId() {
         return id;
@@ -56,6 +77,46 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getLastChange() {
+        return lastChange;
+    }
+
+    public void setLastChange(LocalDateTime lastChange) {
+        this.lastChange = lastChange;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public boolean isCredentialExpired() {
+        return credentialExpired;
+    }
+
+    public void setCredentialExpired(boolean credentialExpired) {
+        this.credentialExpired = credentialExpired;
     }
 
 }

@@ -9,6 +9,7 @@ create table user (
     id bigint not null auto_increment,
     username varchar(20) not null unique,
     password varchar(60) not null,
+    email varchar(50) not null,
     created datetime not null,
     last_change datetime comment 'Last password change',
     expired bit comment 'password expired',

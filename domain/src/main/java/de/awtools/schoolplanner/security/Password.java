@@ -25,11 +25,11 @@ public class Password {
         this.password = password;
     }
     
-    public String getPassword() {
+    public String get() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void set(String password) {
         this.password = password;
     }
 
