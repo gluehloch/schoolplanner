@@ -37,7 +37,7 @@ public class SchoolUserDetailsService implements UserDetailsService {
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            // TODO Auto-generated method stub
+            // TODO Implement some authorities!
             return null;
         }
 

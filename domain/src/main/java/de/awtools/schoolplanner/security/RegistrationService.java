@@ -25,24 +25,29 @@ public class RegistrationService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private SchoolUserDetailsService userDetailsService;
+
     @Transactional
     public User registerNewUserAccount(String nickname, String email,
             String password, String passwordConfirm) {
+
+        LocalDateTime now = LocalDateTime.now();
 
         User user = new User();
         user.setUsername(nickname);
         user.setPassword(new Password(passwordEncoder.encode(password)));
         user.setEmail(email);
-        user.setCreated(LocalDateTime.now());
-        
+        user.setCreated(now);
+        user.setCredentialExpired(false);
+        user.setEnabled(true);
+        user.setLastChange(now);
+        user.setLocked(false);
+
         userRepository.save(user);
-        
+
         return user;
     }
-
- 
-    @Autowired
-    private SchoolUserDetailsService userDetailsService;
 
     @Bean
     public DaoAuthenticationProvider authProvider() {
