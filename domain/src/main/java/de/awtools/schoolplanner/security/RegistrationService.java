@@ -26,25 +26,30 @@ public class RegistrationService {
     private UserRepository userRepository;
 
     @Autowired
+    private UserRegisterRepository userRegisterRepository;
+    
+    @Autowired
     private SchoolUserDetailsService userDetailsService;
 
     @Transactional
-    public User registerNewUserAccount(String nickname, String email,
+    public UserRegister registerNewUserAccount(String username, String email,
             String password, String passwordConfirm) {
 
         LocalDateTime now = LocalDateTime.now();
 
-        User user = new User();
-        user.setUsername(nickname);
+        UserRegister user = new UserRegister();
+        user.setUsername(username);
         user.setPassword(new Password(passwordEncoder.encode(password)));
         user.setEmail(email);
         user.setCreated(now);
+        /*
         user.setCredentialExpired(false);
         user.setEnabled(true);
         user.setLastChange(now);
         user.setLocked(false);
+        */
 
-        userRepository.save(user);
+        userRegisterRepository.save(user);
 
         return user;
     }

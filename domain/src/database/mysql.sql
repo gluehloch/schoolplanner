@@ -5,6 +5,16 @@ select version();
 drop table if exists user_session;
 drop table if exists user;
 
+create table user_register (
+    id bigint not null auto_increment,
+    username varchar(20) not null unique,
+    password varchar(60) not null,
+    email varchar(50) not null,
+    created datetime not null,
+    token varchar(2048) not null,
+    primary key(id)
+) ENGINE=InnoDB;
+
 create table user (
     id bigint not null auto_increment,
     username varchar(20) not null unique,
