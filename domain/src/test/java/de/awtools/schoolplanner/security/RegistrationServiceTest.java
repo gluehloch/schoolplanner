@@ -1,6 +1,6 @@
 package de.awtools.schoolplanner.security;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.transaction.Transactional;
 
@@ -24,9 +24,10 @@ public class RegistrationServiceTest {
 
     @Test
     public void testRegistrationService() {
-        User account = registrationService.registerNewUserAccount("Frosch",
-                "frosch@web.de", "Frosch", "Frosch");
-        
+        UserRegistration account = registrationService
+                .registerNewUserAccount("Frosch",
+                        "frosch@web.de", "Frosch", "Frosch");
+
         assertThat(account.getPassword().get()).isNotEqualTo("Frosch");
     }
 
