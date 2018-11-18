@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.awtools.schoolplanner.security.RegistrationService;
 import de.awtools.schoolplanner.security.User;
+import de.awtools.schoolplanner.security.UserRegistration;
 
 @RestController
 @RequestMapping("/authentication")
@@ -25,7 +26,7 @@ public class AuthenticationService {
             @PathVariable("passwordConfim") String passwordConfirm,
             @PathVariable("email") String email) {
 
-        User newUserAccount = registrationService.registerNewUserAccount(
+        UserRegistration newUserAccount = registrationService.registerNewUserAccount(
                 nickname, email, password,
                 passwordConfirm);
 
