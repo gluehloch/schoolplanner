@@ -1,4 +1,6 @@
 /target/
+/rest
+.factorypath
 .settings
 .project
 .classpath

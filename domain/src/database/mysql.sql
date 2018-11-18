@@ -2,10 +2,11 @@
 select 'Start installation of schoolplanner 0.0.1 MySQL schema.' as INFO;
 select version();
 
+drop table if exists user_registration;
 drop table if exists user_session;
 drop table if exists user;
 
-create table user_register (
+create table user_registration (
     id bigint not null auto_increment,
     username varchar(20) not null unique,
     password varchar(60) not null,

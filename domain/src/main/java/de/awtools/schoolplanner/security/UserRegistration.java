@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "user_register")
-public class UserRegister {
+@Table(name = "user_registration")
+public class UserRegistration {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

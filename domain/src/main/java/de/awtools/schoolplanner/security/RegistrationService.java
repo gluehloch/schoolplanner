@@ -32,12 +32,12 @@ public class RegistrationService {
     private SchoolUserDetailsService userDetailsService;
 
     @Transactional
-    public UserRegister registerNewUserAccount(String username, String email,
+    public UserRegistration registerNewUserAccount(String username, String email,
             String password, String passwordConfirm) {
 
         LocalDateTime now = LocalDateTime.now();
 
-        UserRegister user = new UserRegister();
+        UserRegistration user = new UserRegistration();
         user.setUsername(username);
         user.setPassword(new Password(passwordEncoder.encode(password)));
         user.setEmail(email);

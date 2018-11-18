@@ -20,13 +20,13 @@ public class AuthenticationService {
     @CrossOrigin
     @GetMapping(value = "/register")
     public ConfirmRegistration register(
-            @PathVariable("username") String username,
+            @PathVariable("nickname") String nickname,
             @PathVariable("password") String password,
-            @PathVariable("passwordConfime") String passwordConfirm,
+            @PathVariable("passwordConfim") String passwordConfirm,
             @PathVariable("email") String email) {
 
         User newUserAccount = registrationService.registerNewUserAccount(
-                username, email, password,
+                nickname, email, password,
                 passwordConfirm);
 
         // Token generieren und speichern...
