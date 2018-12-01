@@ -15,7 +15,7 @@ public class Password {
 
     @NotNull
     @Column(name = "password")
-    @Size(min = 60, max = 60)
+    @Size(min = 8, max = 60)
     private String password;
 
     public Password() {

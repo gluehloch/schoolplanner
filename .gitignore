@@ -1,9 +1,21 @@
+
+# Maven
 /target/
 /rest
+
+#
+# IDE
+#
+
+# IntelliJ
 .factorypath
+.idea
+*.iml
+
+# Eclipse
 .settings
 .project
 .classpath
-.vscode
-.idea
 
+# Visual Code
+.vscode

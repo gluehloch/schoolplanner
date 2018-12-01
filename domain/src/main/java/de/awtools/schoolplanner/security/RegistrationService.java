@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +23,15 @@ public class RegistrationService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private UserRegisterRepository userRegisterRepository;
-    
-    @Autowired
-    private SchoolUserDetailsService userDetailsService;
 
     @Transactional
     public UserRegistration registerNewUserAccount(String username, String email,
             String password, String passwordConfirm) {
+
+        if (!StringUtils.equals(password, passwordConfirm)) {
+
+        }
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -42,6 +40,7 @@ public class RegistrationService {
         user.setPassword(new Password(passwordEncoder.encode(password)));
         user.setEmail(email);
         user.setCreated(now);
+        user.setToken("TODO_TOKEN");
         /*
         user.setCredentialExpired(false);
         user.setEnabled(true);
@@ -54,17 +53,16 @@ public class RegistrationService {
         return user;
     }
 
+
+    @Autowired
+    private SchoolUserDetailsService userDetailsService;
+
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         return authProvider;
-    }
-
-    @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
     }
 
 }

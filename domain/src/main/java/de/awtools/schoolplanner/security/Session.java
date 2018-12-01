@@ -47,5 +47,44 @@ public class Session {
         this.id = id;
     }
 
+    public LocalDateTime getLogin() {
+        return login;
+    }
+
+    public void setLogin(LocalDateTime login) {
+        this.login = login;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getLogout() {
+        return logout;
+    }
+
+    public void setLogout(LocalDateTime logout) {
+        this.logout = logout;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
 }
