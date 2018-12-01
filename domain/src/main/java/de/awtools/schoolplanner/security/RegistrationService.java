@@ -25,15 +25,18 @@ public class RegistrationService {
     @Autowired
     private UserRegisterRepository userRegisterRepository;
 
+    @Autowired
+    private TimeService timeService;
+
     @Transactional
     public UserRegistration registerNewUserAccount(String username, String email,
             String password, String passwordConfirm) {
 
         if (!StringUtils.equals(password, passwordConfirm)) {
-
+            throw new IllegalArgumentException("The passwords are not equal.");
         }
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = timeService.now();
 
         UserRegistration user = new UserRegistration();
         user.setUsername(username);
