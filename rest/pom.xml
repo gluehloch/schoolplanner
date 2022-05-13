@@ -3,16 +3,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-       <groupId>de.awtools</groupId>
-       <artifactId>schoolplanner</artifactId>
-       <version>0.0.1-SNAPSHOT</version>
-    </parent>
- 
-    <groupId>de.awtools.schoolplanner</groupId>
+	<parent>
+		<groupId>de.awtools</groupId>
+		<artifactId>schoolplanner</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<groupId>de.awtools.schoolplanner</groupId>
 	<artifactId>rest-api</artifactId>
 	<name>Schoolplanner REST API project</name>
 	<packaging>war</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.2</version>
+			</plugin>
+		</plugins>
+		<finalName>check</finalName>
+	</build>
 
 	<dependencies>
 		<dependency>
